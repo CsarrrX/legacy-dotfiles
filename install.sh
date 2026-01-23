@@ -56,18 +56,18 @@ echo "[*] Creando symlinks de dotfiles..."
 mkdir -p ~/.config/sway ~/.config/waybar ~/.config/wofi ~/.config/kitty
 
 # Enlaces directos a .config
-ln -sf ~/dotfiles/sway/config ~/.config/sway/config
-ln -sf ~/dotfiles/waybar/config ~/.config/waybar/config
-ln -sf ~/dotfiles/waybar/style.css ~/.config/waybar/style.css
-ln -sf ~/dotfiles/wofi/config ~/.config/wofi/config
-ln -sf ~/dotfiles/wofi/style.css ~/.config/wofi/style.css
-ln -sf ~/dotfiles/kitty/kitty.conf ~/.config/kitty/kitty.conf
-ln -sfn ~/dotfiles/nvim ~/.config/nvim
+ln -sf ~/legacy-dotfiles/sway/config ~/.config/sway/config
+ln -sf ~/legacy-dotfiles/waybar/config ~/.config/waybar/config
+ln -sf ~/legacy-dotfiles/waybar/style.css ~/.config/waybar/style.css
+ln -sf ~/legacy-dotfiles/wofi/config ~/.config/wofi/config
+ln -sf ~/legacy-dotfiles/wofi/style.css ~/.config/wofi/style.css
+ln -sf ~/legacy-dotfiles/kitty/kitty.conf ~/.config/kitty/kitty.conf
+ln -sfn ~/legacy-dotfiles/nvim ~/.config/nvim
 
 # Enlaces en HOME
-ln -sf ~/dotfiles/.zshrc ~/.zshrc
-ln -sf ~/dotfiles/starship.toml ~/.config/starship.toml
-ln -sf ~/dotfiles/.latexmkrc ~/.latexmkrc
+ln -sf ~/legacy-dotfiles/.zshrc ~/.zshrc
+ln -sf ~/legacy-dotfiles/starship.toml ~/.config/starship.toml
+ln -sf ~/legacy-dotfiles/.latexmkrc ~/.latexmkrc
 
 # --- Cambio de Shell ---
 if [ "$SHELL" != "$(which zsh)" ]; then
