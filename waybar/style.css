@@ -1,0 +1,28 @@
+* {
+    border: none;
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 13px;
+}
+
+window#waybar {
+    background: rgba(43, 48, 59, 0.5); /* Transparente para ahorrar fatiga visual */
+    color: #ffffff;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    color: #ffffff;
+}
+
+#workspaces button.focused {
+    background-color: #64727D;
+    border-bottom: 3px solid #ffffff;
+}
+
+#network, #disk, #battery, #clock {
+    padding: 0 10px;
+}
+
+#network.disconnected {
+    color: #f53c3c; /* Rojo si no hay internet */
+}

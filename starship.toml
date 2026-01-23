@@ -1,0 +1,30 @@
+# No mostrar una línea vacía al inicio
+add_newline = false
+
+# Diseño del prompt: Solo carpeta, Git y el símbolo de comando
+format = """
+$directory\
+$git_branch\
+$git_status\
+$character
+"""
+
+[character]
+success_symbol = "[➜](bold green) "
+error_symbol = "[➜](bold red) "
+
+[directory]
+style = "bold blue"
+truncation_length = 3
+truncate_to_repo = true
+
+[git_branch]
+symbol = " "
+style = "bold brightness-black"
+
+[git_status]
+style = "bold red"
+
+# Desactivamos explícitamente el módulo de Python/Conda
+[python]
+disabled = true

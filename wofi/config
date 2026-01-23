@@ -1,0 +1,13 @@
+width=400
+height=300
+location=center
+show=drun
+prompt=Buscar...
+filter_rate=100
+allow_images=true
+# Esto quita el borde feo por defecto
+no_actions=true
+halign=fill
+orientation=vertical
+content_halign=fill
+insensitivy=true

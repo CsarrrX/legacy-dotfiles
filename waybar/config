@@ -1,0 +1,34 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 30,
+    "modules-left": ["sway/workspaces"],
+    "modules-center": ["sway/window"],
+    "modules-right": ["network", "disk", "battery", "clock"],
+
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "format": "{name}"
+    },
+    "network": {
+        "format-wifi": "",
+        "format-ethernet": "󰈀",
+        "format-disconnected": "󰖪",
+        "tooltip-format": "{essid} {ipaddr}"
+    },
+    "disk": {
+        "interval": 30,
+        "format": "󰋊 {percentage_used}%",
+        "path": "/"
+    },
+    "battery": {
+        "format": "{icon} {capacity}%",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "clock": {
+        "format": "  {:%H:%M}",
+        "format-alt": "󰃭  {:%Y-%m-%d}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    }
+}
