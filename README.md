@@ -48,7 +48,5 @@ git pull
 * Mod + l: Bloquear pantalla (Swaylock con fondo personalizado y sin indicadores).
 
 ## Notas de Configuracion
-
-* Reloj: El script configura el RTC en local para evitar conflictos de hora con Windows.
 * Symlinks: La organizacion se basa en enlaces simbolicos manuales desde ~/dotfiles hacia ~/.config para facilitar la gestion de cambios.
 * Privacidad y Estilo: Se prioriza una interfaz limpia, eliminando elementos visuales distractores en el prompt y la pantalla de bloqueo.
