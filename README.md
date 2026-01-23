@@ -10,7 +10,7 @@ Este repositorio contiene la configuración personal para Fedora Sway Spin, opti
 * Terminal: Kitty.
 * Shell: Zsh + Starship (prompt configurado sin indicadores de entornos de Python/Conda).
 * Editor: Neovim (instalación manual externa, configuración en ~/dotfiles/nvim).
-* Herramientas de Estudio: TexLive Full, Latexmk y Zathura.
+* Herramientas de Estudio: TexLive Full, Inkscape, Latexmk y Zathura.
 * Desarrollo: Miniconda, Node.js, Rust/Cargo, GCC, Make y R.
 * Assets: Carpeta para fondos de pantalla y recursos del sistema.
 

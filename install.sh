@@ -12,7 +12,7 @@ sudo dnf install -y \
     python3 python3-pip clang-tools-extra cargo rust \
     texlive-scheme-full latexmk zathura zathura-pdf-mupdf \
     R-devel wofi swaybg swaylock kitty libwacom xsetwacom \
-    util-linux-user
+    util-linux-user inkscape
 
 # --- Herramientas de Lenguaje y LSP ---
 echo "[*] Instalando herramientas globales (NPM/Cargo)..."
