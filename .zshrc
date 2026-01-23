@@ -15,5 +15,7 @@ if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
     . "$HOME/miniconda3/etc/profile.d/conda.sh"
 fi
 
-alias lectures="python3 $HOME/ruta/al/proyecto/lectures_cli.py"
+alias lectures="python3 $HOME/setup-notes/scripts/lectures_cli.py"
+alias views="latexmk -pdf -pvc -interaction=nonstopmode -view=none build/master.tex"
+
 
