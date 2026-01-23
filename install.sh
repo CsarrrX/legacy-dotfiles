@@ -69,9 +69,6 @@ ln -sf ~/dotfiles/.zshrc ~/.zshrc
 ln -sf ~/dotfiles/starship.toml ~/.config/starship.toml
 ln -sf ~/dotfiles/.latexmkrc ~/.latexmkrc
 
-# --- Configuración de Reloj (Dual Boot) ---
-sudo timedatectl set-local-rtc 1 --adjust-system-clock
-
 # --- Cambio de Shell ---
 if [ "$SHELL" != "$(which zsh)" ]; then
     chsh -s $(which zsh)
