@@ -11,7 +11,7 @@ sudo dnf install -y \
     git curl wget gcc make cmake zsh firefox nodejs \
     python3 python3-pip clang-tools-extra cargo rust \
     texlive-scheme-full latexmk zathura zathura-pdf-mupdf \
-    tmux R-devel wofi swaybg swaylock kitty libwacom xsetwacom \
+    R-devel wofi swaybg swaylock kitty libwacom xsetwacom \
     util-linux-user
 
 # --- Herramientas de Lenguaje y LSP ---
@@ -67,7 +67,6 @@ ln -sfn ~/dotfiles/nvim ~/.config/nvim
 # Enlaces en HOME
 ln -sf ~/dotfiles/.zshrc ~/.zshrc
 ln -sf ~/dotfiles/starship.toml ~/.config/starship.toml
-ln -sf ~/dotfiles/.tmux.conf ~/.tmux.conf
 ln -sf ~/dotfiles/.latexmkrc ~/.latexmkrc
 
 # --- Configuración de Reloj (Dual Boot) ---
