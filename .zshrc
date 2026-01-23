@@ -14,3 +14,6 @@ export PATH="$HOME/miniconda3/bin:$PATH"
 if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
     . "$HOME/miniconda3/etc/profile.d/conda.sh"
 fi
+
+alias lectures="python3 $HOME/ruta/al/proyecto/lectures_cli.py"
+
