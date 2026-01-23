@@ -263,8 +263,10 @@ return {
     end)
   }),
 
+
+
   -- ==========================================
-  -- 6. PROBABILIDAD Y ESTADÍSTICA
+  -- 7. PROBABILIDAD Y ESTADÍSTICA
   -- ==========================================
   
   s("fsig",  { t("\\mathcal{F}") }),
@@ -300,5 +302,15 @@ return {
   s("bayes", {
     t("P("), i(1, "A_i"), t("|"), i(2, "B"), t(") = "),
     t("\\frac{P("), rep(2), t("|"), rep(1), t(")P("), rep(1), t(")}{\\sum_{j=1}^{n} P("), rep(2), t("|A_j)P(A_j)}"), i(0)
+  }),
+
+  s("fig", {
+    t({ "\\begin{figure}[ht]", "    \\centering", "    \\incfig{" }),
+    i(1, "nombre_de_la_figura"),
+    t({ "}", "    \\caption{" }),
+    i(2, "descripción"),
+    t({ "}", "    \\label{fig:" }),
+    f(function(args) return args[1][1]:gsub("%s+", "-"):lower() end, {1}),
+    t({ "}", "\\end{figure}" }),
   }),
 }
