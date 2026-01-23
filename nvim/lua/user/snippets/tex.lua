@@ -1,7 +1,5 @@
 -- CONFIGURACIONES DE SNIPPETS PARA LATEX
-local ls = require("luasnip")
-local s = ls.snippet
-local t = ls.text_node
+local ls = require("luasnip") local s = ls.snippet local t = ls.text_node
 local i = ls.insert_node
 local f = ls.function_node
 local rep = require("luasnip.extras").rep 
@@ -102,6 +100,7 @@ return {
   -- ==========================================
   
   s("ff", { t("\\frac{"), i(1), t("}{"), i(2), t("}") }),
+  s("bn", { t("\\binom{"), i(1), t("}{"), i(2), t("}") }),
   s("sq",  { t("\\sqrt{"), i(1), t("}") }),
   s("td",  { t("^{"), i(1), t("}") }),
   s("sb", { t("_{"), i(1), t("}") }),
