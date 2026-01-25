@@ -117,3 +117,6 @@ bindsym $mod+Shift+p exec systemctl poweroff
 
 # Lanzar el ecosistema de notas
 bindsym $mod+m exec python3 ~/scripts-notes/scripts/wofi_link.py
+
+# Regla para el Shortcut Manager de Inkscape
+for_window [app_id="popup-bottom-center"] floating enable, border pixel 3, sticky enable, resize set 800 400, move position center
