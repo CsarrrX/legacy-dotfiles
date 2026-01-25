@@ -4,7 +4,7 @@
     "height": 30,
     "modules-left": ["sway/workspaces"],
     "modules-center": ["sway/window"],
-    "modules-right": ["network", "disk", "battery", "clock"],
+    "modules-right": ["network", "disk", "battery", "custom/calendar", "clock"],
 
     "sway/workspaces": {
         "disable-scroll": true,
@@ -30,5 +30,10 @@
         "format": "  {:%H:%M}",
         "format-alt": "󰃭  {:%Y-%m-%d}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+    "custom/calendar": {
+    "format": "{}",
+    "return-type": "json",
+    "exec": "python3 ~/scripts-notes/scripts/calendar-daemon.py",
     }
 }

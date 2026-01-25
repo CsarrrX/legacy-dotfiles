@@ -26,3 +26,13 @@ window#waybar {
 #network.disconnected {
     color: #f53c3c; /* Rojo si no hay internet */
 }
+
+#custom-calendar {
+    color: #81a1c1; /* Un azul nórdico suave */
+}
+
+/* Si quieres que resalte cuando estés en clase (usando la clase del script) */
+#custom-calendar.calendar {
+    color: #a3be8c; /* Cambia a verde cuando hay clase activa */
+}
+
