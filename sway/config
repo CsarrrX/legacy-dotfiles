@@ -114,4 +114,4 @@ bindsym $mod+Shift+r exec systemctl reboot
 bindsym $mod+Shift+p exec systemctl poweroff
 
 # Lanzar el ecosistema de notas
-bindsym $mod+d exec python3 ~/scripts-notes/scripts/notas_gui.py
+bindsym $mod+m exec python3 ~/scripts-notes/scripts/notas_gui.py
