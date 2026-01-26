@@ -10,36 +10,21 @@ vim.keymap.set('n', '<leader>fg', function() require('telescope.builtin').live_g
 vim.keymap.set('n', '<leader>fb', function() require('telescope.builtin').buffers() end, { desc = "Buffers abiertos" })
 
 -- ATAJOS PARA INKSCAPE FIGURES 
--- Mapeo para modo Insertar: Crear figura
+-- Mapeo para modo Insertar: Crear figura con PROMPT de título
 vim.keymap.set('i', '<C-f>', function()
-  -- Obtenemos el título de la línea actual antes de salir de modo insertar
-  local line = vim.fn.getline('.')
+  -- 1. Pedir el título al usuario
+  local title = vim.fn.input('Título de la figura: ')
   
-  -- Salimos de modo insertar
-  vim.cmd('stopinsert')
-  
-  -- Verificación de seguridad para VimTeX
-  if not vim.b.vimtex or not vim.b.vimtex.root then
-    print("Error: VimTeX no detectado o raíz no encontrada")
-    return
+  -- Si el usuario cancela (Esc) o deja vacío, no hacemos nada
+  if title == "" then 
+    print(" Creación cancelada")
+    return 
   end
 
-  local fig_path = vim.b.vimtex.root .. '/figures/'
+  -- 2. Salimos de modo insertar
+  vim.cmd('stopinsert')
   
-  -- Construimos el comando en Lua primero para evitar errores de variables indefinidas
-  -- Usamos string.format para manejar las comillas de forma segura
-  local cmd = string.format(".!inkscape-figures create '%s' '%s'", line:gsub("^%s*", ""), fig_path)
-  
-  -- Ejecutamos el comando
-  vim.cmd('silent ' .. cmd)
-  
-  -- Guardamos y redibujamos
-  vim.cmd('w')
-  vim.cmd('redraw!')
-end, { desc = "Crear figura de Inkscape desde línea actual" })
-
--- Mapeo para modo Normal: Editar figura
-vim.keymap.set('n', '<C-f>', function()
+  -- 3. Verificación de VimTeX
   if not vim.b.vimtex or not vim.b.vimtex.root then
     print("Error: VimTeX no detectado")
     return
@@ -47,10 +32,14 @@ vim.keymap.set('n', '<C-f>', function()
 
   local fig_path = vim.b.vimtex.root .. '/figures/'
   
-  -- Para Wayland (Sway), es mejor usar una ejecución directa que no bloquee
-  -- Usamos 'edit' con el path que configuramos para Wofi en tu picker.py
-  local cmd = string.format("silent !inkscape-figures edit '%s' &", fig_path)
+  -- 4. Construimos el comando con el título que ingresamos en el input
+  local cmd = string.format("inkscape-figures create '%s' '%s'", title, fig_path)
   
-  vim.cmd(cmd)
+  -- 5. Ejecutamos y capturamos la salida para insertar el bloque LaTeX
+  -- Usamos 'r !' para insertar el resultado del comando en el buffer
+  vim.cmd('r !' .. cmd)
+  
+  -- 6. Limpieza y guardado
+  vim.cmd('w')
   vim.cmd('redraw!')
-end, { desc = "Seleccionar y editar figura de Inkscape" })
+end, { desc = "Crear figura de Inkscape con título personalizado" })
