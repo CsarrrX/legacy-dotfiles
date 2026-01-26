@@ -33,6 +33,9 @@ fi
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_ed25519
 
+# --- Auto CMP ---
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/
+
 # --- Miniconda ---
 if [ ! -d "$HOME/miniconda3" ]; then
     echo "[*] Instalando Miniconda..."
