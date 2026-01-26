@@ -1,9 +1,6 @@
 # Cargo to PATH 
 export PATH="$HOME/.cargo/bin:$PATH"
 
-# Starship init
-eval "$(starship init zsh)"
-
 # Nvim PATH
 export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 
@@ -15,7 +12,6 @@ if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
     . "$HOME/miniconda3/etc/profile.d/conda.sh"
 fi
 
-alias lectures="python3 $HOME/setup-notes/scripts/lectures_cli.py"
 alias views='latexmk -pdf -pvc master.tex'
 
 # Función para cambiar la materia activa (cursoact)
@@ -42,3 +38,10 @@ setc() {
         echo "❌ Error: La carpeta '$1' no existe en $NOTAS_DIR"
     fi
 }
+
+# Cargar el plugin de autocompletado
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Starship init
+eval "$(starship init zsh)"
+
