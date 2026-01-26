@@ -243,6 +243,7 @@ return {
     end,
   },
 
+  -- 6. Telescope para finding --
   {
     'nvim-telescope/telescope.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
