@@ -12,29 +12,45 @@ vim.keymap.set('n', '<leader>fb', function() require('telescope.builtin').buffer
 -- ATAJOS PARA INKSCAPE FIGURES 
 -- Mapeo para modo Insertar: Crear figura
 vim.keymap.set('i', '<C-f>', function()
+  -- Obtenemos el título de la línea actual antes de salir de modo insertar
+  local line = vim.fn.getline('.')
+  
   -- Salimos de modo insertar
   vim.cmd('stopinsert')
   
-  -- Obtenemos la línea actual y la ruta de figuras de VimTeX
-  local line = vim.fn.getline('.')
+  -- Verificación de seguridad para VimTeX
+  if not vim.b.vimtex or not vim.b.vimtex.root then
+    print("Error: VimTeX no detectado o raíz no encontrada")
+    return
+  end
+
   local fig_path = vim.b.vimtex.root .. '/figures/'
   
-  -- Ejecutamos el comando de creación
-  -- El '.!' reemplaza la línea actual con el bloque LaTeX que devuelve el script
-  vim.cmd('silent exec ".!inkscape-figures create \'" .. line .. "\' \'" .. fig_path .. "\' "')
+  -- Construimos el comando en Lua primero para evitar errores de variables indefinidas
+  -- Usamos string.format para manejar las comillas de forma segura
+  local cmd = string.format(".!inkscape-figures create '%s' '%s'", line:gsub("^%s*", ""), fig_path)
   
-  -- Guardamos el archivo
+  -- Ejecutamos el comando
+  vim.cmd('silent ' .. cmd)
+  
+  -- Guardamos y redibujamos
   vim.cmd('w')
+  vim.cmd('redraw!')
 end, { desc = "Crear figura de Inkscape desde línea actual" })
 
 -- Mapeo para modo Normal: Editar figura
 vim.keymap.set('n', '<C-f>', function()
+  if not vim.b.vimtex or not vim.b.vimtex.root then
+    print("Error: VimTeX no detectado")
+    return
+  end
+
   local fig_path = vim.b.vimtex.root .. '/figures/'
   
-  -- Ejecutamos el comando de edición en segundo plano
-  local cmd = 'silent exec "!inkscape-figures edit \'" .. fig_path .. "\' > /dev/null 2>&1 &"'
-  vim.cmd(cmd)
+  -- Para Wayland (Sway), es mejor usar una ejecución directa que no bloquee
+  -- Usamos 'edit' con el path que configuramos para Wofi en tu picker.py
+  local cmd = string.format("silent !inkscape-figures edit '%s' &", fig_path)
   
-  -- Redibujamos la pantalla para limpiar posibles artefactos de la terminal
+  vim.cmd(cmd)
   vim.cmd('redraw!')
 end, { desc = "Seleccionar y editar figura de Inkscape" })
