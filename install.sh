@@ -4,13 +4,9 @@ set -e
 # ================================
 # Dotfiles Bootstrap Script (Fedora + Sway)
 # ================================
-
-echo "[*] Instalando paquetes del sistema y herramientas de compilación..."
-# Agregamos lo que faltaba: swaybg, swaylock, wofi y las herramientas de desarrollo
-sudo dnf install -y \
+echo "[*] Instalando paquetes del sistema y herramientas de compilación..." # Agregamos lo que faltaba: swaybg, swaylock, wofi y las herramientas de desarrollo sudo dnf install -y \
     git curl wget gcc make cmake zsh firefox nodejs mako \
-    python3 python3-pip clang-tools-extra cargo rust \
-    texlive-scheme-full latexmk zathura zathura-pdf-mupdf \
+    python3 python3-pip clang-tools-extra cargo rust \ texlive-scheme-full latexmk zathura zathura-pdf-mupdf \
     R-devel wofi swaybg swaylock kitty libwacom xsetwacom \
     util-linux-user inkscape wtype \
     python3-google-api-client python3-google-auth-oauthlib python3-google-auth-httplib2 \
@@ -58,7 +54,7 @@ fi
 
 # --- Estructura de Dotfiles y Symlinks ---
 echo "[*] Creando symlinks de dotfiles..."
-mkdir -p ~/.config/sway ~/.config/waybar ~/.config/wofi ~/.config/kitty
+mkdir -p ~/.config/sway ~/.config/waybar ~/.config/wofi ~/.config/kitty ~/.config/mako
 
 # Enlaces directos a .config
 ln -sf ~/legacy-dotfiles/sway/config ~/.config/sway/config

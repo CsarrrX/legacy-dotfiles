@@ -1,5 +1,6 @@
 # -- Ejecución de algunas cosas importantes --
 exec waybar
+exec mako
 exec swaybg -i ~/.config/assets/background2.jpg -m fill
 
 # -- Configuración del teclado, sistema y tableta --
