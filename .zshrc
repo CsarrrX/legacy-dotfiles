@@ -39,9 +39,6 @@ setc() {
     fi
 }
 
-# Cargar el plugin de autocompletado
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-
 # Starship init
 eval "$(starship init zsh)"
 
