@@ -9,6 +9,7 @@ Este repositorio contiene la configuración personal para Fedora Sway Spin, opti
 * Lanzador de Aplicaciones: Wofi (configuración centrada tipo Spotlight).
 * Terminal: Kitty.
 * Shell: Zsh + Starship (prompt configurado sin indicadores de entornos de Python/Conda).
+* Notificaciones: Mako
 * Editor: Neovim (instalación manual externa, configuración en ~/dotfiles/nvim).
 * Herramientas de Estudio: TexLive Full, Inkscape, Latexmk y Zathura.
 * Desarrollo: Miniconda, Node.js, Rust/Cargo, GCC, Make y R.

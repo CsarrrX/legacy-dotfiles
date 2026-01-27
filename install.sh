@@ -67,6 +67,7 @@ ln -sf ~/legacy-dotfiles/waybar/style.css ~/.config/waybar/style.css
 ln -sf ~/legacy-dotfiles/wofi/config ~/.config/wofi/config
 ln -sf ~/legacy-dotfiles/wofi/style.css ~/.config/wofi/style.css
 ln -sf ~/legacy-dotfiles/kitty/kitty.conf ~/.config/kitty/kitty.conf
+ln -sf ~/legacy-dotfiles/mako/config ~/.config/mako/config
 ln -sfn ~/legacy-dotfiles/nvim ~/.config/nvim
 ln -sfn ~/legacy-dotfiles/assets ~/.config/assets
 
