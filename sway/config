@@ -1,6 +1,6 @@
 # -- Ejecución de algunas cosas importantes --
 exec waybar
-exec swaybg -i ~/.config/assets/background1.jpg -m fill
+exec swaybg -i ~/.config/assets/background2.jpg -m fill
 
 # -- Configuración del teclado, sistema y tableta --
 input "type:keyboard" {
