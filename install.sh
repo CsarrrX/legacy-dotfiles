@@ -8,7 +8,7 @@ set -e
 echo "[*] Instalando paquetes del sistema y herramientas de compilación..."
 # Agregamos lo que faltaba: swaybg, swaylock, wofi y las herramientas de desarrollo
 sudo dnf install -y \
-    git curl wget gcc make cmake zsh firefox nodejs \
+    git curl wget gcc make cmake zsh firefox nodejs mako \
     python3 python3-pip clang-tools-extra cargo rust \
     texlive-scheme-full latexmk zathura zathura-pdf-mupdf \
     R-devel wofi swaybg swaylock kitty libwacom xsetwacom \
