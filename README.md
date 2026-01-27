@@ -13,6 +13,7 @@ Este repositorio contiene la configuración personal para Fedora Sway Spin, opti
 * Herramientas de Estudio: TexLive Full, Inkscape, Latexmk y Zathura.
 * Desarrollo: Miniconda, Node.js, Rust/Cargo, GCC, Make y R.
 * Assets: Carpeta para fondos de pantalla y recursos del sistema.
+* Paquetes importantes de python para poder usar scripts de notas.
 
 ## Instalacion (Bootstrap)
 
