@@ -10,7 +10,6 @@ Este repositorio contiene la configuración personal para Fedora, migrada de Swa
 * **Lanzador de Aplicaciones:** Rofi (estilo minimalista centrado, reemplazo de Wofi).
 * **Terminal:** Kitty.
 * **Shell:** Zsh + Starship (prompt limpio sin indicadores de entornos virtuales).
-* **Notificaciones:** Dunst (configuración de baja intrusión con colores coherentes al sistema).
 * **Editor:** Neovim (configuración avanzada en `~/dotfiles/nvim`).
 * **Herramientas de Estudio:** TexLive Full, Inkscape, Latexmk y Zathura.
 * **Desarrollo:** Miniconda, Node.js, Rust/Cargo, GCC, Make y R.

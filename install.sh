@@ -11,7 +11,7 @@ sudo dnf install -y \
     texlive-scheme-full latexmk zathura zathura-pdf-mupdf \
     R-devel kitty libwacom xsetwacom xinput \
     util-linux-user inkscape \
-    i3 i3lock polybar rofi feh picom maim xclip xdotool dunst \
+    i3 i3lock polybar rofi feh picom maim xclip xdotool \
     python3-google-api-client python3-google-auth-oauthlib python3-google-auth-httplib2 \
     python3-pyyaml python3-pytz python3-dateutil -y
 
@@ -54,13 +54,12 @@ fi
 
 # --- Estructura de Dotfiles y Symlinks ---
 echo "[*] Creando symlinks de dotfiles..."
-mkdir -p ~/.config/i3 ~/.config/polybar ~/.config/rofi ~/.config/kitty ~/.config/picom ~/.config/dunst
+mkdir -p ~/.config/i3 ~/.config/polybar ~/.config/rofi ~/.config/kitty ~/.config/picom 
 
 ln -sf ~/legacy-dotfiles/i3/config ~/.config/i3/config
 ln -sf ~/legacy-dotfiles/polybar/config.ini ~/.config/polybar/config.ini
 ln -sf ~/legacy-dotfiles/rofi/config.rasi ~/.config/rofi/config.rasi
 ln -sf ~/legacy-dotfiles/picom/picom.conf ~/.config/picom/picom.conf
-ln -sf ~/legacy-dotfiles/dunst/dunstrc ~/.config/dunst/dunstrc
 ln -sf ~/legacy-dotfiles/kitty/kitty.conf ~/.config/kitty/kitty.conf
 
 # Enlaces compartidos
