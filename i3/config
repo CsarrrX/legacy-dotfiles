@@ -6,9 +6,8 @@ exec --no-startup-id feh --bg-fill ~/.config/assets/background2.jpg
 
 # --- Configuración de Teclado y Touchpad (X11) ---
 exec --no-startup-id setxkbmap latam -option caps:swapescape
-# Para el touchpad, i3 suele respetar los drivers de libinput (X11), 
-# pero si necesitas forzar el tap:
-exec --no-startup-id xinput set-prop "Nombre de tu Touchpad" "libinput Tapping Enabled" 1
+exec --no-startup-id xsetwacom --set "Wacom Intuos S Pen stylus" MapToOutput eDP-1
+exec --no-startup-id xsetwacom --set "Wacom Intuos S Pad pad" Button 1 "key +ctrl +z -z -ctrl"
 
 # --- Configuración Visual ---
 font pango:JetBrainsMono Nerd Font 11
