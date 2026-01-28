@@ -13,6 +13,7 @@ if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
 fi
 
 alias views='latexmk -pdf -pvc master.tex'
+alias notas='inkscape-figures watch && python3 ~/inkscape-shortcut-manager/main.py'
 
 # Función para cambiar la materia activa (cursoact)
 setc() {
