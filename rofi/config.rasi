@@ -1,0 +1,74 @@
+configuration {
+    modi:                       "drun,run";
+    show-icons:                 true;
+    display-drun:               "Buscar...";
+    drun-display-format:        "{name}";
+    font:                        "JetBrainsMono Nerd Font 11";
+}
+
+* {
+    bg-col:  #2b303bE6; /* rgba(43, 48, 59, 0.9) */
+    border-col: #64727D;
+    selected-col: #64727D;
+    fg-col: #ffffff;
+    
+    background-color: transparent;
+}
+
+window {
+    width:            400px;
+    height:           300px;
+    border:           2px;
+    border-color:     @border-col;
+    border-radius:    10px;
+    background-color: @bg-col;
+}
+
+mainbox {
+    children: [ inputbar, listview ];
+    padding: 10px;
+}
+
+inputbar {
+    children: [ prompt, entry ];
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    margin: 5px;
+    padding: 5px;
+}
+
+prompt {
+    color: @fg-col;
+    margin: 0 5px 0 0;
+}
+
+entry {
+    color: @fg-col;
+    placeholder: "Escribe aquí...";
+}
+
+listview {
+    border: 0px;
+    margin: 5px;
+    columns: 1;
+    lines: 8;
+}
+
+element {
+    padding: 5px;
+    border-radius: 5px;
+}
+
+element selected {
+    background-color: @selected-col;
+}
+
+element-text {
+    color: @fg-col;
+    vertical-align: 0.5;
+}
+
+element-icon {
+    size: 24px;
+    padding: 0 10px 0 0;
+}

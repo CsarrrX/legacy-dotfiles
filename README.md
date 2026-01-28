@@ -1,20 +1,20 @@
-# Dotfiles - Fedora Sway Setup
+# Dotfiles - Fedora i3 Setup
 
-Este repositorio contiene la configuración personal para Fedora Sway Spin, optimizada para un flujo de trabajo eficiente y un uso reducido de espacio en disco.
+Este repositorio contiene la configuración personal para Fedora, migrada de Sway a i3, optimizada para un flujo de trabajo eficiente, minimalista y con alto rendimiento bajo X11.
 
 ## Contenido del Repositorio
 
-* Window Manager: Sway (configuración minimalista sin mensajes de confirmación de salida).
-* Barra de Estado: Waybar (transparente con indicadores de Red, Disco, Batería y Reloj).
-* Lanzador de Aplicaciones: Wofi (configuración centrada tipo Spotlight).
-* Terminal: Kitty.
-* Shell: Zsh + Starship (prompt configurado sin indicadores de entornos de Python/Conda).
-* Notificaciones: Mako
-* Editor: Neovim (instalación manual externa, configuración en ~/dotfiles/nvim).
-* Herramientas de Estudio: TexLive Full, Inkscape, Latexmk y Zathura.
-* Desarrollo: Miniconda, Node.js, Rust/Cargo, GCC, Make y R.
-* Assets: Carpeta para fondos de pantalla y recursos del sistema.
-* Paquetes importantes de python para poder usar scripts de notas.
+* **Window Manager:** i3-gaps (configuración con gaps de 10px y bordes inteligentes).
+* **Compositor:** Picom (configurado con Dual Kawase Blur, sombras y esquinas redondeadas).
+* **Barra de Estado:** Polybar (diseño modular con soporte para scripts de Google Calendar y monitoreo de sistema).
+* **Lanzador de Aplicaciones:** Rofi (estilo minimalista centrado, reemplazo de Wofi).
+* **Terminal:** Kitty.
+* **Shell:** Zsh + Starship (prompt limpio sin indicadores de entornos virtuales).
+* **Notificaciones:** Dunst (configuración de baja intrusión con colores coherentes al sistema).
+* **Editor:** Neovim (configuración avanzada en `~/dotfiles/nvim`).
+* **Herramientas de Estudio:** TexLive Full, Inkscape, Latexmk y Zathura.
+* **Desarrollo:** Miniconda, Node.js, Rust/Cargo, GCC, Make y R.
+* **Assets:** Fondos de pantalla y recursos en `~/.config/assets`.
 
 ## Instalacion (Bootstrap)
 
@@ -44,10 +44,10 @@ git pull
 
 ## Atajos de Teclado Principales
 
-* Mod + d: Abrir Wofi.
+* Mod + d: Abrir rofi.
 * Mod + t: Abrir terminal Kitty.
-* Mod + Shift + e: Salir de Sway inmediatamente.
-* Mod + l: Bloquear pantalla (Swaylock con fondo personalizado y sin indicadores).
+* Mod + Shift + e: Salir de i3 inmediatamente.
+* Mod + l: Bloquear pantalla
 
 ## Notas de Configuracion
 * Symlinks: La organizacion se basa en enlaces simbolicos manuales desde ~/dotfiles hacia ~/.config para facilitar la gestion de cambios.

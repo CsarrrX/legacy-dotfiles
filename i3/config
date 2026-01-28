@@ -1,0 +1,100 @@
+# --- Ejecución de servicios y periféricos ---
+exec_always --no-startup-id picom -b
+exec_always --no-startup-id polybar
+exec --no-startup-id dunst
+exec --no-startup-id feh --bg-fill ~/.config/assets/background2.jpg
+
+# --- Configuración de Teclado y Touchpad (X11) ---
+exec --no-startup-id setxkbmap latam -option caps:swapescape
+# Para el touchpad, i3 suele respetar los drivers de libinput (X11), 
+# pero si necesitas forzar el tap:
+exec --no-startup-id xinput set-prop "Nombre de tu Touchpad" "libinput Tapping Enabled" 1
+
+# --- Configuración Visual ---
+font pango:JetBrainsMono Nerd Font 11
+default_border pixel 1
+default_floating_border normal
+hide_edge_borders smart
+
+# Gaps (Requiere i3-gaps o i3-resurrect en versiones nuevas de i3)
+gaps inner 10
+gaps outer 5
+smart_gaps on
+
+# --- Variables ---
+set $mod Mod4 
+set $term kitty
+set $browser firefox
+
+# --- Atajos de Teclado ---
+bindsym $mod+t exec $term
+bindsym $mod+f exec $browser 
+bindsym $mod+Shift+q kill
+bindsym $mod+d exec rofi -show run
+
+# Volumen (Pulseaudio/Pipewire)
+bindsym XF86AudioRaiseVolume exec --no-startup-id wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
+bindsym XF86AudioLowerVolume exec --no-startup-id wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+bindsym XF86AudioMute exec --no-startup-id wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+
+# Brillo
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set 5%+
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
+
+# Movimiento Vim
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right   
+
+# Modo Resize
+mode "resize" {
+    bindsym h resize shrink width 10 px
+    bindsym j resize grow height 10 px
+    bindsym k resize shrink height 10 px
+    bindsym l resize grow width 10 px
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# Workspaces
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+
+# Mover a Workspaces
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+
+# Captura de pantalla
+bindsym $mod+s exec maim -s | xclip -selection clipboard -t image/png
+
+# Gestión de sesión
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec i3-msg exit
+
+# Bloqueo (Usando i3lock)
+bindsym $mod+Shift+l exec i3lock -u -i ~/.config/assets/background1.jpg
+
+# Sistema
+bindsym $mod+Shift+p exec systemctl poweroff
+
+# Tu script de notas (Asegúrate de cambiar wofi por rofi dentro del .py)
+bindsym $mod+m exec python3 ~/scripts-notes/scripts/rofi_link.py

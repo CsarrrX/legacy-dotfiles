@@ -2,13 +2,16 @@
 set -e
 
 # ================================
-# Dotfiles Bootstrap Script (Fedora + Sway)
+# Dotfiles Bootstrap Script (Fedora + i3)
 # ================================
-echo "[*] Instalando paquetes del sistema y herramientas de compilación..." # Agregamos lo que faltaba: swaybg, swaylock, wofi y las herramientas de desarrollo sudo dnf install -y \
-    git curl wget gcc make cmake zsh firefox nodejs mako \
-    python3 python3-pip clang-tools-extra cargo rust \ texlive-scheme-full latexmk zathura zathura-pdf-mupdf \
-    R-devel wofi swaybg swaylock kitty libwacom xsetwacom \
-    util-linux-user inkscape wtype \
+echo "[*] Instalando paquetes del sistema y herramientas de compilación..."
+sudo dnf install -y \
+    git curl wget gcc make cmake zsh firefox nodejs \
+    python3 python3-pip clang-tools-extra cargo rust \
+    texlive-scheme-full latexmk zathura zathura-pdf-mupdf \
+    R-devel kitty libwacom xsetwacom xinput \
+    util-linux-user inkscape \
+    i3 i3lock polybar rofi feh picom maim xclip xdotool dunst \
     python3-google-api-client python3-google-auth-oauthlib python3-google-auth-httplib2 \
     python3-pyyaml python3-pytz python3-dateutil -y
 
@@ -16,7 +19,7 @@ echo "[*] Instalando paquetes del sistema y herramientas de compilación..." # A
 echo "[*] Instalando herramientas globales (NPM/Cargo)..."
 sudo npm install -g pyright
 cargo install texlab
-cargo install starship  # Instalado vía cargo como pediste
+cargo install starship
 
 # --- Git config global ---
 echo "[*] Configurando Git..."
@@ -30,9 +33,6 @@ if [ ! -f "$HOME/.ssh/id_ed25519" ]; then
 fi
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_ed25519
-
-# --- Auto CMP ---
-git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/
 
 # --- Miniconda ---
 if [ ! -d "$HOME/miniconda3" ]; then
@@ -54,20 +54,18 @@ fi
 
 # --- Estructura de Dotfiles y Symlinks ---
 echo "[*] Creando symlinks de dotfiles..."
-mkdir -p ~/.config/sway ~/.config/waybar ~/.config/wofi ~/.config/kitty ~/.config/mako
+mkdir -p ~/.config/i3 ~/.config/polybar ~/.config/rofi ~/.config/kitty ~/.config/picom ~/.config/dunst
 
-# Enlaces directos a .config
-ln -sf ~/legacy-dotfiles/sway/config ~/.config/sway/config
-ln -sf ~/legacy-dotfiles/waybar/config ~/.config/waybar/config
-ln -sf ~/legacy-dotfiles/waybar/style.css ~/.config/waybar/style.css
-ln -sf ~/legacy-dotfiles/wofi/config ~/.config/wofi/config
-ln -sf ~/legacy-dotfiles/wofi/style.css ~/.config/wofi/style.css
+ln -sf ~/legacy-dotfiles/i3/config ~/.config/i3/config
+ln -sf ~/legacy-dotfiles/polybar/config ~/.config/polybar/config
+ln -sf ~/legacy-dotfiles/rofi/config.rasi ~/.config/rofi/config.rasi
+ln -sf ~/legacy-dotfiles/picom/picom.conf ~/.config/picom/picom.conf
+ln -sf ~/legacy-dotfiles/dunst/dunstrc ~/.config/dunst/dunstrc
 ln -sf ~/legacy-dotfiles/kitty/kitty.conf ~/.config/kitty/kitty.conf
-ln -sf ~/legacy-dotfiles/mako/config ~/.config/mako/config
+
+# Enlaces compartidos
 ln -sfn ~/legacy-dotfiles/nvim ~/.config/nvim
 ln -sfn ~/legacy-dotfiles/assets ~/.config/assets
-
-# Enlaces en HOME
 ln -sf ~/legacy-dotfiles/.zshrc ~/.zshrc
 ln -sf ~/legacy-dotfiles/starship.toml ~/.config/starship.toml
 ln -sf ~/legacy-dotfiles/.latexmkrc ~/.latexmkrc
