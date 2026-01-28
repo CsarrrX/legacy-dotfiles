@@ -14,9 +14,7 @@ font pango:JetBrainsMono Nerd Font 11
 default_border pixel 1
 default_floating_border normal
 hide_edge_borders smart
-
-# Gaps (Requiere i3-gaps o i3-resurrect en versiones nuevas de i3)
-gaps inner 10
+# Gaps (Requiere i3-gaps o i3-resurrect en versiones nuevas de i3) gaps inner 10
 gaps outer 5
 smart_gaps on
 
@@ -97,3 +95,6 @@ bindsym $mod+Shift+p exec systemctl poweroff
 
 # Tu script de notas (Asegúrate de cambiar wofi por rofi dentro del .py)
 bindsym $mod+m exec python3 ~/scripts-notes/scripts/rofi_link.py
+
+# Abrir inkscape flotando
+for_window [class="Inkscape"] floating_enable
