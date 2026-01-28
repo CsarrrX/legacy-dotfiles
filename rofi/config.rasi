@@ -1,74 +1,109 @@
 configuration {
-    modi:                       "drun,run";
-    show-icons:                 true;
-    display-drun:               "Buscar...";
-    drun-display-format:        "{name}";
-    font:                        "JetBrainsMono Nerd Font 11";
+    modi: "drun";
+    show-icons: true;
+    display-drun: "Buscar...";
+    font: "JetBrainsMono Nerd Font 11";
+    drun-display-format: "{name}";
 }
 
 * {
-    bg-col:  #2b303bE6; /* rgba(43, 48, 59, 0.9) */
-    border-col: #64727D;
-    selected-col: #64727D;
-    fg-col: #ffffff;
+    /* Tus variables de color */
+    bg-col:      rgba(43, 48, 59, 0.9);
+    border-col:  #64727D;
+    text-col:    #ffffff;
+    input-bg:    rgba(255, 255, 255, 0.1);
     
+    /* REGLA DE ORO: Todo transparente por defecto */
     background-color: transparent;
+    text-color:       @text-col;
+    margin: 0;
+    padding: 0;
 }
 
 window {
-    width:            400px;
-    height:           300px;
-    border:           2px;
-    border-color:     @border-col;
-    border-radius:    10px;
-    background-color: @bg-col;
+    width: 400px;
+    height: 400px;
+    location: center;
+    anchor: center;
+    background-color: @bg-col; /* Solo la ventana tiene color de fondo */
+    border: 2px;
+    border-color: @border-col;
+    border-radius: 10px;
 }
 
 mainbox {
-    children: [ inputbar, listview ];
     padding: 10px;
+    children: [ inputbar, listview ];
+    background-color: transparent;
 }
 
 inputbar {
-    children: [ prompt, entry ];
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: @input-bg;
     border-radius: 5px;
-    margin: 5px;
-    padding: 5px;
+    padding: 8px;
+    margin: 0 0 10px 0;
+    children: [ prompt, entry ];
 }
 
 prompt {
-    color: @fg-col;
-    margin: 0 5px 0 0;
+    padding: 0 10px 0 0;
+    text-color: @text-col;
+    background-color: transparent;
 }
 
 entry {
-    color: @fg-col;
-    placeholder: "Escribe aquí...";
+    placeholder: "";
+    text-color: @text-col;
+    background-color: transparent; /* Importante para el input */
 }
 
 listview {
-    border: 0px;
-    margin: 5px;
     columns: 1;
-    lines: 8;
+    lines: 9;
+    background-color: transparent;
+    border: 0px;
 }
 
 element {
-    padding: 5px;
+    padding: 8px;
     border-radius: 5px;
+    spacing: 10px;
+    background-color: transparent;
+    text-color: @text-col;
 }
 
-element selected {
-    background-color: @selected-col;
+/* --- AQUÍ ESTABA EL PROBLEMA --- */
+/* Forzamos a que TODOS los estados normales y alternos sean transparentes */
+
+element normal.normal {
+    background-color: transparent;
+    text-color: @text-col;
 }
 
+element alternate.normal {
+    background-color: transparent; /* Esto elimina las rayas blancas alternas */
+    text-color: @text-col;
+}
+
+/* Solo cambiamos el color cuando está SELECCIONADO */
+element selected.normal {
+    background-color: @border-col;
+    text-color: #ffffff;
+}
+
+element selected.active {
+    background-color: @border-col;
+    text-color: #ffffff;
+}
+
+/* Asegurar que texto e iconos no traigan fondo propio */
 element-text {
-    color: @fg-col;
-    vertical-align: 0.5;
+    background-color: transparent;
+    text-color:       inherit;
+    vertical-align:   0.5;
 }
 
 element-icon {
+    background-color: transparent;
     size: 24px;
-    padding: 0 10px 0 0;
 }
