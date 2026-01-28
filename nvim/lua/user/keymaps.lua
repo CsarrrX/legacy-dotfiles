@@ -43,3 +43,25 @@ vim.keymap.set('i', '<C-f>', function()
   vim.cmd('w')
   vim.cmd('redraw!')
 end, { desc = "Crear figura de Inkscape con título personalizado" })
+
+-- Mapeo para modo Normal: Editar figura existente
+vim.keymap.set('n', '<C-f>', function()
+  -- 1. Verificación de VimTeX (igual que en tu script de creación)
+  if not vim.b.vimtex or not vim.b.vimtex.root then
+    print("Error: VimTeX no detectado")
+    return
+  end
+
+  local fig_path = vim.b.vimtex.root .. '/figures/'
+  
+  -- 2. Construimos el comando de edición
+  -- Usamos '&' al final para que se ejecute en segundo plano y no bloquee Neovim
+  -- Redirigimos la salida a /dev/null para que no ensucie la pantalla
+  local cmd = string.format("inkscape-figures edit '%s' > /dev/null 2>&1 &", fig_path)
+  
+  -- 3. Ejecutamos el comando
+  os.execute(cmd)
+  
+  -- 4. Redibujamos la pantalla para limpiar cualquier artefacto visual
+  vim.cmd('redraw!')
+end, { desc = "Editar figura de Inkscape existente" })
