@@ -61,6 +61,7 @@ listview {
     columns: 1;
     lines: 9;
     background-color: transparent;
+    scrollbar: false;
     border: 0px;
 }
 
