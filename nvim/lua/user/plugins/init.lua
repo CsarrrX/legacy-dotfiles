@@ -16,6 +16,7 @@ return {
       -- Tu visor (ya sabemos que funciona)
       vim.g.vimtex_view_method = "zathura"
       vim.keymap.set('n', '<leader>ll', '<cmd>VimtexView<CR>', { desc = 'Ver PDF en Zathura' })
+      vim.keymap.set('n', '<leader>lc', '<cmd>VimtexCompile<CR>', { desc = 'Compilación continua (Toggle)' })
       -- Configuración del Índice (TOC)
       vim.g.vimtex_toc_config = {
         name = 'Índice de Análisis',
