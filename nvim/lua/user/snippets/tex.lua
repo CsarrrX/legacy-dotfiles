@@ -313,4 +313,29 @@ return {
     f(function(args) return args[1][1]:gsub("%s+", "-"):lower() end, {1}),
     t({ "}", "\\end{figure}" }),
   }),
+
+  -- ==========================================
+  -- 8. NUEVAS ADICIONES (EXP, CANCEL Y DERIVADAS)
+  -- ==========================================
+
+  -- Exponencial e^{...}
+  s("ee", { t("e^{"), i(1), t("}") }),
+  --
+  -- Cancelar sin color
+  s("can", { t("\\cancel{"), i(1), t("}") }),
+
+  -- Uso: cc <tab> {término} <tab> {color}
+  s("ccan", { 
+    t("\\colorcancel{"), i(1), t("}{"), i(2, "red"), t("}") 
+  }),
+
+  -- Derivada dy/dx (Leibniz clásica)
+  s("dydx", { 
+    t("\\frac{dy}{dx}"), i(0) 
+  }),
+
+  -- Derivada general df/dx
+  s("dv", { 
+    t("\\frac{d"), i(1, "y"), t("}{d"), i(2, "x"), t("}") 
+  }),
 }
