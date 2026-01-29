@@ -13,3 +13,5 @@ if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
 fi
 
 alias notas='inkscape-figures watch && python3 ~/inkscape-shortcut-manager/main.py'
+
+eval "$(starship init zsh)"
