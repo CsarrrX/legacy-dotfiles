@@ -75,26 +75,6 @@ return {
     i(0),
   }),
 
-  s("code", {
-    t("\\begin{lstlisting}[language="),
-    i(1, "Python"),
-    t(", caption="),
-    i(2, "Ejemplo en Python"),
-    t({ "]", "" }),
-    i(0, "def saludo():\n    print(\"Hola Mundo\")"),
-    t({ "", "\\end{lstlisting}" }),
-  }),
-
-  
-  s("algo", {
-    t({ "\\begin{algorithm}", "\\caption{" }), i(1, "Título del Algoritmo"), t({ "}", "\\begin{algorithmic}[1]", "    \\Require " }), i(2, "Entrada"),
-    t({ "", "    \\Ensure " }), i(3, "Salida"),
-    t({ "", "", "    \\State " }), i(4, "Cuerpo del algoritmo"),
-    t({ "", "", "    \\State \\Return " }), i(5, "resultado"),
-    t({ "", "\\end{algorithmic}", "\\end{algorithm}" }),
-  }),
-  
-  
   -- ==========================================
   -- 2. CÁLCULO Y OPERACIONES
   -- ==========================================
@@ -241,6 +221,7 @@ return {
   s("abs", { t("|"), i(1), t("|") }),
 
   s("bf",  { t("\\textbf{"), i(1), t("}") }),
+  s("mbf",  { t("\\mathbf{"), i(1), t("}") }),
   s("it",  { t("\\textit{"), i(1), t("}") }),
   s("txt", { t("\\text{"), i(1), t("}") }),
 
@@ -337,5 +318,10 @@ return {
   -- Derivada general df/dx
   s("dv", { 
     t("\\frac{d"), i(1, "y"), t("}{d"), i(2, "x"), t("}") 
+  }),
+
+  -- Indicadora
+  s("ind", {
+    t("\\mathbf{1}_{"), i(1, "A"), t("}")
   }),
 }
