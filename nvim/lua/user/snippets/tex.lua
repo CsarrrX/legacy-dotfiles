@@ -75,6 +75,20 @@ return {
     i(0),
   }),
 
+  s("obs", {
+    t("\\begin{observacion}"),
+    t({ "", "\t" }), i(1),
+    t({ "", "\\end{observacion}" }),
+    i(0),
+  }),
+
+  s("enum", {
+    t("\\begin{enumerate}[label=\\Roman*.]"),
+    t({ "", "\t" }), i(1),
+    t({ "", "\\end{enumerate}" }),
+    i(0),
+  }),
+
   -- ==========================================
   -- 2. CÁLCULO Y OPERACIONES
   -- ==========================================
@@ -132,6 +146,16 @@ return {
   -- Transformada de Laplace
   s("lap",  { t("\\mathcal{L}\\{"), i(1), t("\\}") }),
   s("ilap", { t("\\mathcal{L}^{-1}\\{"), i(1), t("\\}") }),
+
+    -- Derivada dy/dx (Leibniz clásica)
+  s("dydx", { 
+    t("\\frac{dy}{dx}"), i(0) 
+  }),
+
+  -- Derivada general df/dx
+  s("dv", { 
+    t("\\frac{d"), i(1, "y"), t("}{d"), i(2, "x"), t("}") 
+  }),
 
   -- ==========================================
   -- 3. ANÁLISIS (DELTA–EPSILON)
@@ -201,6 +225,8 @@ return {
   s("nn",    { t("\\cap ") }),
   s("set",   { t("\\{"), i(1), t("\\}") }),
   s("emp",   { t("\\emptyset") }),
+  s("UU",  { t("\\bigcup_{"), i(1, "i=1"), t("}^{"), i(2, "n"), t("} ") }),
+  s("NN", { t("\\bigcap_{"), i(1, "i=1"), t("}^{"), i(2, "n"), t("} ") }),
 
   s("imp", { t("\\implies ") }),
   s("iff", { t("\\iff ") }),
@@ -218,7 +244,7 @@ return {
   s("lr{", { t("\\left\\{ "), i(1), t(" \\right\\}") }),
   s("lra", { t("\\left\\langle "), i(1), t(" \\right\\rangle") }),
   s("norm",{ t("\\|"), i(1), t("\\|") }),
-  s("abs", { t("|"), i(1), t("|") }),
+  s("abs", { t("\\left|"), i(1), t("\\right|") }),
 
   s("bf",  { t("\\textbf{"), i(1), t("}") }),
   s("mbf",  { t("\\mathbf{"), i(1), t("}") }),
@@ -243,8 +269,6 @@ return {
       return "\\vec{" .. snip.captures[1] .. "}"
     end)
   }),
-
-
 
   -- ==========================================
   -- 7. PROBABILIDAD Y ESTADÍSTICA
@@ -285,16 +309,6 @@ return {
     t("\\frac{P("), rep(2), t("|"), rep(1), t(")P("), rep(1), t(")}{\\sum_{j=1}^{n} P("), rep(2), t("|A_j)P(A_j)}"), i(0)
   }),
 
-  s("fig", {
-    t({ "\\begin{figure}[ht]", "    \\centering", "    \\incfig{" }),
-    i(1, "nombre_de_la_figura"),
-    t({ "}", "    \\caption{" }),
-    i(2, "descripción"),
-    t({ "}", "    \\label{fig:" }),
-    f(function(args) return args[1][1]:gsub("%s+", "-"):lower() end, {1}),
-    t({ "}", "\\end{figure}" }),
-  }),
-
   -- ==========================================
   -- 8. NUEVAS ADICIONES (EXP, CANCEL Y DERIVADAS)
   -- ==========================================
@@ -308,16 +322,6 @@ return {
   -- Uso: cc <tab> {término} <tab> {color}
   s("ccan", { 
     t("\\colorcancel{"), i(1), t("}{"), i(2, "red"), t("}") 
-  }),
-
-  -- Derivada dy/dx (Leibniz clásica)
-  s("dydx", { 
-    t("\\frac{dy}{dx}"), i(0) 
-  }),
-
-  -- Derivada general df/dx
-  s("dv", { 
-    t("\\frac{d"), i(1, "y"), t("}{d"), i(2, "x"), t("}") 
   }),
 
   -- Indicadora
