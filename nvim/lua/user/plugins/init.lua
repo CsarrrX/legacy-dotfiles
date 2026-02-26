@@ -17,23 +17,6 @@ return {
       vim.g.vimtex_view_method = "zathura"
       vim.keymap.set('n', '<leader>ll', '<cmd>VimtexView<CR>', { desc = 'Ver PDF en Zathura' })
       vim.keymap.set('n', '<leader>lc', '<cmd>VimtexCompile<CR>', { desc = 'Compilación continua (Toggle)' })
-      -- Configuración del Índice (TOC)
-      vim.g.vimtex_toc_config = {
-        name = 'Índice de Análisis',
-        layers = { 'content', 'include' }, 
-        split_width = 35,
-        show_numbers = 1, -- Autonumera: Prop 1, Prop 2...
-        mode = 1,
-      }
-
-      -- Agregamos Lema y Axioma a la lista de reconocimiento
-      vim.g.vimtex_toc_custom_matchers = {
-        {title = 'Prop', re = [[\\begin{proposicion}]]},
-        {title = 'Def',  re = [[\\begin{definicion}]]},
-        {title = 'Teo',  re = [[\\begin{teorema}]]},
-        {title = 'Lem',  re = [[\\begin{lema}]]},
-        {title = 'Axm',  re = [[\\begin{axioma}]]},
-      }
     end,
   },
 
@@ -245,22 +228,14 @@ return {
     end,
   },
 
-  -- 6. Telescope para finding --
+  -- 7. Surround
   {
-    'nvim-telescope/telescope.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim' },
+    "kylechui/nvim-surround",
+    version = "*", -- Usa la última versión
+    event = "VeryLazy",
     config = function()
-      require('telescope').setup({
-        defaults = {
-          -- Ignora archivos auxiliares de LaTeX para que no estorben en la búsqueda
-          file_ignore_patterns = { "%.aux", "%.log", "%.toc", "%.pdf", "%.gz", "%.fls", "%.fdb_latexmk" },
-          layout_strategy = 'horizontal',
-          layout_config = { 
-            preview_width = 0.6,
-            width = 0.95 
-          },
-        }
-      })
-    end
+        require("nvim-surround").setup({})
+    end,
   },
+
 }

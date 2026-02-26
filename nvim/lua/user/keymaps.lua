@@ -4,11 +4,6 @@ vim.g.maplocalleader = " "
 
 local keymap = vim.keymap.set
 
--- Atajos para búsqueda de archivos y texto general TELESCOPE 
-vim.keymap.set('n', '<leader>ff', function() require('telescope.builtin').find_files() end, { desc = "Buscar Archivos" })
-vim.keymap.set('n', '<leader>fg', function() require('telescope.builtin').live_grep() end, { desc = "Grep general" })
-vim.keymap.set('n', '<leader>fb', function() require('telescope.builtin').buffers() end, { desc = "Buffers abiertos" })
-
 -- ATAJOS PARA INKSCAPE FIGURES 
 -- Mapeo para modo Insertar: Crear figura con PROMPT de título
 vim.keymap.set('i', '<C-f>', function()
