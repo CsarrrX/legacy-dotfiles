@@ -80,6 +80,9 @@ bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10
 
+# Mover las pestañas
+bindsym $mod+Shift+h move right
+
 # Captura de pantalla
 bindsym $mod+s exec maim -s | xclip -selection clipboard -t image/png
 
@@ -94,8 +97,5 @@ bindsym $mod+Shift+l exec i3lock -u -i ~/.config/assets/background1.jpg
 # Sistema
 bindsym $mod+Shift+p exec systemctl poweroff
 
-# Tu script de notas (Asegúrate de cambiar wofi por rofi dentro del .py)
+# Script de notas 
 bindsym $mod+m exec python3 ~/scripts-notes/scripts/rofi_link.py
-
-# Abrir inkscape flotando
-for_window [class="Inkscape"] floating_enable
