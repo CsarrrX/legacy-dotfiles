@@ -84,7 +84,7 @@ bindsym $mod+Shift+0 move container to workspace number 10
 bindsym $mod+Shift+h move right
 
 # Captura de pantalla
-bindsym $mod+s exec --no-startup-id maim -s ~/Pictures/$(date +%s).png && xclip -selection clipboard -t image/png -i ~/Pictures/$(date +%s).png
+bindsym $mod+s exec --no-startup-id sh -c 'maim -s | tee ~/Pictures/$(date +%Y%m%d_%H%M%S).png | xclip -selection clipboard -t image/png'
 
 # Gestión de sesión
 bindsym $mod+Shift+c reload
