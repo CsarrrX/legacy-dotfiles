@@ -238,4 +238,19 @@ return {
     end,
   },
 
+  -- 8. Telescope
+  {
+    'nvim-telescope/telescope.nvim',
+    tag = '0.1.8',
+    dependencies = { 
+        'nvim-lua/plenary.nvim',
+        { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' }
+    },
+    config = function()
+        require('telescope').setup({})
+        -- Cargar la extensión de fzf si la instalaste
+        require('telescope').load_extension('fzf')
+    end
+  }, 
+
 }
