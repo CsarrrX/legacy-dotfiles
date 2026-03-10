@@ -1,7 +1,3 @@
--- Tecla líder: 
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
 local keymap = vim.keymap.set
 
 -- ATAJOS PARA INKSCAPE FIGURES 
