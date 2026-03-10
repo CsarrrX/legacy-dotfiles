@@ -12,7 +12,7 @@ vim.keymap.set('i', '<C-f>', function()
   
   -- Si el usuario cancela (Esc) o deja vacío, no hacemos nada
   if title == "" then 
-    print(" Creación cancelada")
+    print("Creación cancelada")
     return 
   end
 
@@ -59,4 +59,11 @@ vim.keymap.set('n', '<C-f>', function()
   
   -- 4. Redibujamos la pantalla para limpiar cualquier artefacto visual
   vim.cmd('redraw!')
-end, { desc = "Editar figura de Inkscape existente" })
+  end, { desc = "Editar figura de Inkscape existente" })
+
+  -- Telescope
+  local builtin = require('telescope.builtin')
+  -- Buscar archivos por nombre
+  vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
+  -- Buscar texto
+  vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
