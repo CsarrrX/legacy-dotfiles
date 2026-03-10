@@ -1,3 +1,7 @@
+-- Tecla líder: 
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 local keymap = vim.keymap.set
 
 -- ATAJOS PARA INKSCAPE FIGURES 
@@ -33,10 +37,10 @@ vim.keymap.set('i', '<C-f>', function()
   -- 6. Limpieza y guardado
   vim.cmd('w')
   vim.cmd('redraw!')
-end, { desc = "Crear figura de Inkscape con título personalizado" })
+  end, { desc = "Crear figura de Inkscape con título personalizado" })
 
--- Mapeo para modo Normal: Editar figura existente
-vim.keymap.set('n', '<C-f>', function()
+  -- Mapeo para modo Normal: Editar figura existente
+  vim.keymap.set('n', '<C-f>', function()
   -- 1. Verificación de VimTeX (igual que en tu script de creación)
   if not vim.b.vimtex or not vim.b.vimtex.root then
     print("Error: VimTeX no detectado")
@@ -57,9 +61,3 @@ vim.keymap.set('n', '<C-f>', function()
   vim.cmd('redraw!')
   end, { desc = "Editar figura de Inkscape existente" })
 
-  -- Telescope
-  local builtin = require('telescope.builtin')
-  -- Buscar archivos por nombre
-  vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
-  -- Buscar texto
-  vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
