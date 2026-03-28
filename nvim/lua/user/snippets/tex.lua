@@ -250,6 +250,8 @@ return {
   s("mbf",  { t("\\mathbf{"), i(1), t("}") }),
   s("it",  { t("\\textit{"), i(1), t("}") }),
   s("txt", { t("\\text{"), i(1), t("}") }),
+  s("cal",  { t("\\mathcal{"), i(1), t("}") }),
+  s("scr",  { t("\\mathscr{"), i(1), t("}") }),
 
   s("inf", { t("\\infty") }),
   s("cd",  { t("\\cdot") }),
