@@ -226,7 +226,7 @@ return {
   s("set",   { t("\\{"), i(1), t("\\}") }),
   s("emp",   { t("\\emptyset") }),
   s("UU",  { t("\\bigcup_{"), i(1, "i=1"), t("}^{"), i(2, "n"), t("} ") }),
-  s("NN", { t("\\bigcap_{"), i(1, "i=1"), t("}^{"), i(2, "n"), t("} ") }),
+  s("NN1", { t("\\bigcap_{"), i(1, "i=1"), t("}^{"), i(2, "n"), t("} ") }),
 
   s("imp", { t("\\implies ") }),
   s("iff", { t("\\iff ") }),
@@ -251,6 +251,7 @@ return {
   s("it",  { t("\\textit{"), i(1), t("}") }),
   s("txt", { t("\\text{"), i(1), t("}") }),
   s("cal",  { t("\\mathcal{"), i(1), t("}") }),
+  s("frak",  { t("\\mathfrak{"), i(1), t("}") }),
   s("scr",  { t("\\mathscr{"), i(1), t("}") }),
 
   s("inf", { t("\\infty") }),
