@@ -278,8 +278,7 @@ return {
   -- ==========================================
   
   s("fsig",  { t("\\mathcal{F}") }),
-  s("prob",  { t("P("), i(1), t(")") }),
-  s("P",     { t("\\mathbb{P}") }),
+  s("prob",  { t("\\mathrm{P}("), i(1), t(")") }),
   s("EE",    { t("\\mathbb{E}["), i(1), t("]") }),
   s("Var",   { t("\\text{Var}("), i(1), t(")") }),
   s("cov",   { t("\\text{Cov}("), i(1), t(", "), i(2), t(")") }),
@@ -299,17 +298,17 @@ return {
   s("pois",  { t("\\text{Poisson}("), i(1, "\\lambda"), t(")") }),
   
   s("pc", {
-    t("P("), i(1, "A"), t(" | "), i(2, "B"), t(")"), i(0)
+    t("\\mathrm{P}("), i(1, "A"), t(" | "), i(2, "B"), t(")"), i(0)
   }),
 
   s("pdef", {
-    t("P("), i(1, "A"), t(" | "), i(2, "B"), t(") = \\frac{P("), 
-    rep(1), t(" \\cap "), rep(2), t(")}{P("), rep(2), t(")}"), i(0)
+    t("\\mathrm{P}("), i(1, "A"), t(" | "), i(2, "B"), t(") = \\frac{\\mathrm{P}("), 
+    rep(1), t(" \\cap "), rep(2), t(")}{\\mathrm{P}("), rep(2), t(")}"), i(0)
   }),
 
   s("bayes", {
-    t("P("), i(1, "A_i"), t("|"), i(2, "B"), t(") = "),
-    t("\\frac{P("), rep(2), t("|"), rep(1), t(")P("), rep(1), t(")}{\\sum_{j=1}^{n} P("), rep(2), t("|A_j)P(A_j)}"), i(0)
+    t("\\mathrm{P}("), i(1, "A_i"), t("|"), i(2, "B"), t(") = "),
+    t("\\frac{\\mathrm{P}("), rep(2), t("|"), rep(1), t(")\\mathrm{P}("), rep(1), t(")}{\\sum_{j=1}^{n} \\mathrm{P}("), rep(2), t("|A_j) \\mathrm{P}(A_j)}"), i(0)
   }),
 
   -- ==========================================
