@@ -13,8 +13,6 @@ exec --no-startup-id xsetwacom --set "Wacom Intuos S Pad pad" Button 1 "key +ctr
 font pango:JetBrainsMono Nerd Font 11
 default_border pixel 1
 default_floating_border normal
-hide_edge_borders smart
-# Gaps (Requiere i3-gaps o i3-resurrect en versiones nuevas de i3) gaps inner 10
 gaps outer 10
 gaps inner 5
 smart_gaps on
@@ -81,7 +79,10 @@ bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10
 
 # Mover las pestañas
-bindsym $mod+Shift+h move right
+bindsym $mod+Mod1+h move left
+bindsym $mod+Mod1+l move right
+bindsym $mod+Mod1+j move down
+bindsym $mod+Mod1+k move up
 
 # Captura de pantalla
 bindsym $mod+s exec --no-startup-id sh -c 'maim -s | tee ~/Pictures/$(date +%Y%m%d_%H%M%S).png | xclip -selection clipboard -t image/png'
