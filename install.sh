@@ -57,6 +57,7 @@ echo "[*] Creando symlinks de dotfiles..."
 mkdir -p ~/.config/i3 ~/.config/polybar ~/.config/rofi ~/.config/kitty ~/.config/picom 
 
 ln -sf ~/legacy-dotfiles/i3/config ~/.config/i3/config
+ln -sf ~/legacy-dotfiles/fastfetch/config.jsonc ~/.config/fastfetch/config.jsonc
 ln -sf ~/legacy-dotfiles/polybar/config.ini ~/.config/polybar/config.ini
 ln -sf ~/legacy-dotfiles/rofi/config.rasi ~/.config/rofi/config.rasi
 ln -sf ~/legacy-dotfiles/picom/picom.conf ~/.config/picom/picom.conf
