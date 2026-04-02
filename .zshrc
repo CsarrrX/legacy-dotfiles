@@ -15,6 +15,3 @@ fi
 alias ink='python3 ~/inkscape-shortcut-manager/main.py'
 alias ink2='inkscape-figures watch --no-daemon'
 eval "$(starship init zsh)"
-
-# CONFIGS
-bindkey -v # vi-motions
