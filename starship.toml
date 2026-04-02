@@ -10,20 +10,27 @@ $character
 """
 
 [character]
-success_symbol = "[➜](bold green) "
-error_symbol = "[➜](bold red) "
+# Símbolo clásico de MS-DOS
+success_symbol = "[>](bold white) "
+error_symbol = "[>](bold red) "
 
 [directory]
-style = "bold blue"
+# Estilo de barra de título de Windows 95 (Fondo azul marino, texto blanco)
+style = "fg:white bg:#000080"
+format = "[ $path ]($style) "
 truncation_length = 3
 truncate_to_repo = true
 
 [git_branch]
-symbol = " "
-style = "bold brightness-black"
+# Símbolo clásico y color gris claro (VGA)
+symbol = "± "
+style = "bold #C0C0C0"
+format = "[$symbol$branch]($style) "
 
 [git_status]
+# Mantenemos el rojo para cuando hay cambios sin guardar
 style = "bold red"
+format = "[$all_status$ahead_behind]($style) "
 
 # Desactivamos explícitamente el módulo de Python/Conda
 [python]

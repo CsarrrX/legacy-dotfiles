@@ -2,7 +2,7 @@
 exec_always --no-startup-id picom -b
 exec_always --no-startup-id polybar
 exec --no-startup-id dunst
-exec --no-startup-id feh --bg-fill ~/.config/assets/background2.jpg
+exec --no-startup-id feh --bg-fill ~/.config/assets/Wallpaper.jpg
 
 # --- Configuración de Teclado y Touchpad (X11) ---
 exec --no-startup-id setxkbmap latam -option caps:swapescape

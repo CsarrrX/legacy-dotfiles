@@ -7,11 +7,13 @@ configuration {
 }
 
 * {
-    /* Tus variables de color */
-    bg-col:      rgba(43, 48, 59, 0.9);
-    border-col:  #64727D;
-    text-col:    #ffffff;
-    input-bg:    rgba(255, 255, 255, 0.1);
+    /* Colores retro Windows 95/98 */
+    bg-col:            #D4D0C8;
+    border-col:        #808080;
+    text-col:          #000000;
+    input-bg:          #FFFFFF; /* Cajas de texto blancas en la época */
+    selected-col:      #000080; /* Azul marino clásico */
+    selected-text-col: #FFFFFF;
     
     /* REGLA DE ORO: Todo transparente por defecto */
     background-color: transparent;
@@ -28,7 +30,7 @@ window {
     background-color: @bg-col; /* Solo la ventana tiene color de fondo */
     border: 2px;
     border-color: @border-col;
-    border-radius: 10px;
+    border-radius: 0px; /* Sin bordes redondeados */
 }
 
 mainbox {
@@ -39,7 +41,9 @@ mainbox {
 
 inputbar {
     background-color: @input-bg;
-    border-radius: 5px;
+    border-radius: 0px; /* Sin bordes redondeados */
+    border: 2px; /* Borde gris para simular el campo de texto "hundido" */
+    border-color: @border-col;
     padding: 8px;
     margin: 0 0 10px 0;
     children: [ prompt, entry ];
@@ -67,7 +71,7 @@ listview {
 
 element {
     padding: 8px;
-    border-radius: 5px;
+    border-radius: 0px; /* Sin bordes redondeados */
     spacing: 10px;
     background-color: transparent;
     text-color: @text-col;
@@ -88,13 +92,13 @@ element alternate.normal {
 
 /* Solo cambiamos el color cuando está SELECCIONADO */
 element selected.normal {
-    background-color: @border-col;
-    text-color: #ffffff;
+    background-color: @selected-col;
+    text-color: @selected-text-col;
 }
 
 element selected.active {
-    background-color: @border-col;
-    text-color: #ffffff;
+    background-color: @selected-col;
+    text-color: @selected-text-col;
 }
 
 /* Asegurar que texto e iconos no traigan fondo propio */
