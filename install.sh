@@ -10,7 +10,7 @@ sudo dnf install -y \
     python3 python3-pip clang-tools-extra cargo rust \
     texlive-scheme-full latexmk zathura zathura-pdf-mupdf \
     R-devel kitty libwacom xsetwacom xinput \
-    util-linux-user inkscape \
+    util-linux-user inkscape xournalpp \
     i3 i3lock polybar rofi feh picom maim xclip xdotool \
     -y
 
