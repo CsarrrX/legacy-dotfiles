@@ -23,7 +23,7 @@ return {
   s("dm", { t("\\["), t({ "", "\t" }), i(1), t({ "", "\\]" }), i(0) }),
 
   -- ==========================================
-  -- 1.1 ENTORNOS AMSTHM
+  -- 1.1 ENTORNOS 
   -- ==========================================
 
   s("def", {
@@ -109,57 +109,41 @@ return {
   s("df",   { t("\\frac{d}{d"), i(1, "x"), t("} ") }),
   s("part", { t("\\frac{\\partial}{\\partial "), i(1, "x"), t("} ") }),
 
-  -- ==========================================
-  -- 2.1 ECUACIONES DIFERENCIALES (SOLO LAS CLAVE)
-  -- ==========================================
-
-  -- Derivada de orden n
   s("dfn", {
     t("\\frac{d^{"), i(1, "n"), t("}}{d"),
     i(2, "x"), t("^{"), rep(1), t("}} ")
   }),
 
-  -- Lineal de primer orden
   s("lin1", {
     t("\\frac{dy}{dx} + "), i(1, "P(x)"),
     t("y = "), i(2, "Q(x)")
   }),
 
-  -- Lineal de segundo orden
   s("lin2", {
     t("\\frac{d^2y}{dx^2} + "), i(1, "a"),
     t("\\frac{dy}{dx} + "), i(2, "b"),
     t("y = "), i(3, "g(x)")
   }),
 
-  -- Factor integrante
   s("fi", {
     t("\\mu("), i(1, "x"),
     t(") = e^{\\int "), i(2, "P(x)"), t("\\,dx}")
   }),
 
-  -- Condición inicial
   s("ci", {
     t("y("), i(1, "0"), t(") = "), i(2)
   }),
 
-  -- Transformada de Laplace
   s("lap",  { t("\\mathcal{L}\\{"), i(1), t("\\}") }),
   s("ilap", { t("\\mathcal{L}^{-1}\\{"), i(1), t("\\}") }),
 
-    -- Derivada dy/dx (Leibniz clásica)
   s("dydx", { 
     t("\\frac{dy}{dx}"), i(0) 
   }),
 
-  -- Derivada general df/dx
   s("dv", { 
     t("\\frac{d"), i(1, "y"), t("}{d"), i(2, "x"), t("}") 
   }),
-
-  -- ==========================================
-  -- 3. ANÁLISIS (DELTA–EPSILON)
-  -- ==========================================
 
   s("deleps", {
     t("\\forall\\,\\varepsilon > 0,\\; \\exists\\,\\delta > 0\\; \\text{tal que si } "),
@@ -208,10 +192,6 @@ return {
   s("Ps", { t("\\Psi") }),
   s("Om", { t("\\Omega") }),
 
-  -- ==========================================
-  -- 4. CONJUNTOS Y LÓGICA
-  -- ==========================================
-  
   s("RR", { t("\\mathbb{R}") }),
   s("QQ", { t("\\mathbb{Q}") }),
   s("ZZ", { t("\\mathbb{Z}") }),
@@ -235,10 +215,6 @@ return {
   s("lor", { t("\\lor ") }),
   s("land", { t("\\land ") }),
   
-  -- ==========================================
-  -- 5. PARÉNTESIS Y VISUAL
-  -- ==========================================
-  
   s("lr",  { t("\\left( "), i(1), t(" \\right)") }),
   s("lr[", { t("\\left[ "), i(1), t(" \\right]") }),
   s("lr{", { t("\\left\\{ "), i(1), t(" \\right\\}") }),
@@ -257,10 +233,6 @@ return {
   s("inf", { t("\\infty") }),
   s("cd",  { t("\\cdot") }),
 
-  -- ==========================================
-  -- 6. AUTOMATIZACIÓN REGEX
-  -- ==========================================
-  
   s({ trig = "([a-zA-Z])(%d+)", regTrig = true, wordTrig = false }, {
     f(function(_, snip)
       return snip.captures[1] .. "_{" .. snip.captures[2] .. "}"
@@ -273,10 +245,6 @@ return {
     end)
   }),
 
-  -- ==========================================
-  -- 7. PROBABILIDAD Y ESTADÍSTICA
-  -- ==========================================
-  
   s("fsig",  { t("\\mathcal{F}") }),
   s("prob",  { t("\\mathrm{P}("), i(1), t(")") }),
   s("EE",    { t("\\mathbb{E}["), i(1), t("]") }),
@@ -311,27 +279,13 @@ return {
     t("\\frac{\\mathrm{P}("), rep(2), t("|"), rep(1), t(")\\mathrm{P}("), rep(1), t(")}{\\sum_{j=1}^{n} \\mathrm{P}("), rep(2), t("|A_j) \\mathrm{P}(A_j)}"), i(0)
   }),
 
-  -- ==========================================
-  -- 8. NUEVAS ADICIONES (EXP, CANCEL Y DERIVADAS)
-  -- ==========================================
-
-  -- Exponencial e^{...}
   s("ee", { t("e^{"), i(1), t("}") }),
-  --
-  -- Cancelar sin color
   s("can", { t("\\cancel{"), i(1), t("}") }),
-
-  -- Uso: cc <tab> {término} <tab> {color}
-  s("ccan", { 
-    t("\\colorcancel{"), i(1), t("}{"), i(2, "red"), t("}") 
-  }),
-
-  -- Indicadora
   s("ind", {
     t("\\mathbf{1}_{"), i(1, "A"), t("}")
   }),
-
   s("id", {
     t("\\mathbf{I}_{"), i(1, "A"), t("}")
   }),
+
 }

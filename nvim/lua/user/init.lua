@@ -23,6 +23,6 @@ require("user.keymaps")
 -- 5. Iniciar Lazy y decirle dónde están los plugins
 require("lazy").setup("user.plugins")
 
--- Cargar configuración de snippets
+-- 6. Cargar configuración de snippets
 pcall(require, "user.snippets_config")
 

@@ -1,7 +1,6 @@
 # --- Ejecución de servicios y periféricos ---
 exec_always --no-startup-id picom -b
 exec_always --no-startup-id polybar
-exec --no-startup-id dunst
 exec --no-startup-id feh --bg-fill ~/.config/assets/Wallpaper.jpg
 
 # --- Configuración de Teclado y Touchpad (X11) ---
@@ -38,7 +37,7 @@ bindsym XF86AudioMute exec --no-startup-id wpctl set-mute @DEFAULT_AUDIO_SINK@ t
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set 5%+
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
 
-# Movimiento Vim
+# Movimiento
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up

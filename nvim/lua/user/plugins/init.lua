@@ -1,4 +1,3 @@
--- ~/.config/nvim/lua/user/plugins/init.lua
 return {
   -- 1. Estética (Tokyo Night)
   {
@@ -6,21 +5,20 @@ return {
     lazy = false,
     priority = 1000,
     config = function() vim.cmd([[colorscheme tokyonight]]) end,
-  }, -- <--- IMPORTANTE: Esta coma separa los plugins
+  }, 
 
-  -- 2. VimTex (Con carpeta de compilación limpia)
+  -- 2. VimTex 
   {
     "lervag/vimtex",
     lazy = false,
     init = function()
-      -- Tu visor (ya sabemos que funciona)
       vim.g.vimtex_view_method = "zathura"
       vim.keymap.set('n', '<leader>ll', '<cmd>VimtexView<CR>', { desc = 'Ver PDF en Zathura' })
       vim.keymap.set('n', '<leader>lc', '<cmd>VimtexCompile<CR>', { desc = 'Compilación continua (Toggle)' })
     end,
   },
 
-  -- 3. LuaSnip (Modo Standalone - Velocidad Pura)
+  -- 3. LuaSnip (Modo Standalone)
   {
     "L3MON4D3/LuaSnip",
     lazy = false, 
@@ -34,11 +32,8 @@ return {
         enable_autosnippets = true, 
       })
 
-      -- Cargar tus snippets de la carpeta user/snippets
-      -- Asegúrate de que esta ruta exista
       require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/lua/user/snippets" })
 
-      -- === MAPEOS MANUALES (Reemplazo del Tab) ===
       local keymap = vim.keymap.set
       
       -- Tecla TAB inteligente
@@ -46,19 +41,17 @@ return {
         if ls.expand_or_jumpable() then
           ls.expand_or_jump()
         else
-          -- Envía un Tab real si no hay snippet
           vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
         end
       end, { silent = true })
 
-      -- Tecla SHIFT+TAB para regresar
       keymap({"i", "s"}, "<S-Tab>", function()
         if ls.jumpable(-1) then
           ls.jump(-1)
         end
       end, { silent = true })
       
-      -- Recargar config rápido con <Espacio> + r
+      -- Recargar config con <Espacio> + r
       keymap("n", "<leader>r", ":source ~/.config/nvim/init.lua<CR>", { desc = "Recargar Config" })
     end,
   },
@@ -118,6 +111,7 @@ return {
       })
     end,
   },
+
   -- 5. LSP NATIVO (Neovim 0.11+)
   {
     "neovim/nvim-lspconfig",
@@ -169,7 +163,7 @@ return {
         settings = {
           texlab = {
             completion = {
-              enabled = true, -- <- clave para nvim-cmp
+              enabled = true, 
             },
   
             diagnostics = {
@@ -187,7 +181,7 @@ return {
                 "-synctex=1",
                 "%f",
               },
-              onSave = false, -- no compila al guardar (VimTeX ya se encarga)
+              onSave = false,
             },
   
             forwardSearch = {

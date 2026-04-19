@@ -12,8 +12,7 @@ sudo dnf install -y \
     R-devel kitty libwacom xsetwacom xinput \
     util-linux-user inkscape \
     i3 i3lock polybar rofi feh picom maim xclip xdotool \
-    python3-google-api-client python3-google-auth-oauthlib python3-google-auth-httplib2 \
-    python3-pyyaml python3-pytz python3-dateutil -y
+    -y
 
 # --- Herramientas de Lenguaje y LSP ---
 echo "[*] Instalando herramientas globales (NPM/Cargo)..."

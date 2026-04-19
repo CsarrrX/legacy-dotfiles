@@ -7,15 +7,13 @@ configuration {
 }
 
 * {
-    /* Colores retro Windows 95/98 */
     bg-col:            #D4D0C8;
     border-col:        #808080;
     text-col:          #000000;
-    input-bg:          #FFFFFF; /* Cajas de texto blancas en la época */
-    selected-col:      #000080; /* Azul marino clásico */
+    input-bg:          #FFFFFF; 
+    selected-col:      #000080; 
     selected-text-col: #FFFFFF;
     
-    /* REGLA DE ORO: Todo transparente por defecto */
     background-color: transparent;
     text-color:       @text-col;
     margin: 0;
@@ -27,10 +25,10 @@ window {
     height: 400px;
     location: center;
     anchor: center;
-    background-color: @bg-col; /* Solo la ventana tiene color de fondo */
+    background-color: @bg-col; 
     border: 2px;
     border-color: @border-col;
-    border-radius: 0px; /* Sin bordes redondeados */
+    border-radius: 0px; 
 }
 
 mainbox {
@@ -41,8 +39,8 @@ mainbox {
 
 inputbar {
     background-color: @input-bg;
-    border-radius: 0px; /* Sin bordes redondeados */
-    border: 2px; /* Borde gris para simular el campo de texto "hundido" */
+    border-radius: 0px;
+    border: 2px; 
     border-color: @border-col;
     padding: 8px;
     margin: 0 0 10px 0;
@@ -58,7 +56,7 @@ prompt {
 entry {
     placeholder: "";
     text-color: @text-col;
-    background-color: transparent; /* Importante para el input */
+    background-color: transparent; 
 }
 
 listview {
@@ -71,14 +69,11 @@ listview {
 
 element {
     padding: 8px;
-    border-radius: 0px; /* Sin bordes redondeados */
+    border-radius: 0px; 
     spacing: 10px;
     background-color: transparent;
     text-color: @text-col;
 }
-
-/* --- AQUÍ ESTABA EL PROBLEMA --- */
-/* Forzamos a que TODOS los estados normales y alternos sean transparentes */
 
 element normal.normal {
     background-color: transparent;
@@ -86,11 +81,10 @@ element normal.normal {
 }
 
 element alternate.normal {
-    background-color: transparent; /* Esto elimina las rayas blancas alternas */
+    background-color: transparent; 
     text-color: @text-col;
 }
 
-/* Solo cambiamos el color cuando está SELECCIONADO */
 element selected.normal {
     background-color: @selected-col;
     text-color: @selected-text-col;
@@ -101,7 +95,6 @@ element selected.active {
     text-color: @selected-text-col;
 }
 
-/* Asegurar que texto e iconos no traigan fondo propio */
 element-text {
     background-color: transparent;
     text-color:       inherit;
