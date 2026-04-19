@@ -112,7 +112,7 @@ return {
     end,
   },
 
-  -- 5. LSP NATIVO (Neovim 0.11+)
+  -- 5. LSP nativo 
   {
     "neovim/nvim-lspconfig",
       lazy = false,
@@ -206,7 +206,7 @@ return {
       })
   
       -- ==========================
-      -- Keymaps LSP (comunes)
+      -- Keymaps LSP 
       -- ==========================
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(ev)
@@ -222,14 +222,11 @@ return {
     end,
   },
 
-  -- 7. Surround
+  -- 7. Autopairs
   {
-    "kylechui/nvim-surround",
-    version = "*", 
-    event = "VeryLazy",
-    config = function()
-        require("nvim-surround").setup({})
-    end,
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    config = true
   },
 
   -- 8. Telescope
