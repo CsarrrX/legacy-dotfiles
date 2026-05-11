@@ -8,7 +8,7 @@ $do_cd = 1;
 $pdf_mode = 1;
 
 # Synctex siempre
-$pdflatex = 'pdflatex -synctex=1 -interaction=nonstopmode %O %S';
+$pdflatex = 'pdflatex -synctex=1 -interaction=nonstopmode -shell-escape %O %S';
 
 # Limpieza más agresiva
 $clean_ext .= ' acn acr alg glg glo gls fls fdb_latexmk synctex.gz';
