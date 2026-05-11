@@ -20,4 +20,4 @@ opt.clipboard = "unnamedplus" -- Permite copiar/pegar
 
 -- TeX 
 opt.conceallevel = 2 -- Mostrar símbolos
-g.tex_conceal = "abdmg"
+vim.g.tex_conceal = "abdmg"
