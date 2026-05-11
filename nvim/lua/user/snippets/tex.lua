@@ -235,12 +235,12 @@ return {
 
   s("fsig",  { t("\\mathcal{F}") }),
   s("prob",  { t("\\mathrm{P}("), i(1), t(")") }),
-  s("EE",    { t("\\mathbb{E}["), i(1), t("]") }),
+  s("EE",    { t("\\mathbf{E}\\left["), i(1), t("\\right]") }),
   s("Var",   { t("\\text{Var}("), i(1), t(")") }),
   s("cov",   { t("\\text{Cov}("), i(1), t(", "), i(2), t(")") }),
   
   s("espprob", {
-    t("("), t("\\Omega, "), t("\\mathcal{F}, "), t("\\mathbb{P}"), t(")")
+    t("("), t("\\Omega, "), t("\\mathcal{F}, "), t("\\mathrm{P}"), t(")")
   }),
 
   s("va",    { t("X: \\Omega \\to "), i(1, "\\mathbb{R}") }),
@@ -299,5 +299,11 @@ return {
   s("epscrit", {
     t("U(f, \\mathcal{P}) - L(f, \\mathcal{P}) < \\varepsilon"), i(0)
   }),
+
+  s("xour", fmt([[ \href{{run:{}/hand/{}.xopp}}{{[Desarrollo: {}]}} ]], {
+    f(function() return vim.fn.getcwd() end), 
+    i(1, "nombre"),
+    rep(1)
+  })),
 
 }
