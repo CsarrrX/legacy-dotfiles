@@ -300,7 +300,7 @@ return {
     t("U(f, \\mathcal{P}) - L(f, \\mathcal{P}) < \\varepsilon"), i(0)
   }),
 
-  s("xour", fmt([[ \href{{run:{}/hand/{}.xopp}}{{[Desarrollo: {}]}} ]], {
+  s("xour", fmt([[ \href{{run:{}/hand/{}.pdf}}{{[Desarrollo: {}]}} ]], {
     f(function() return vim.fn.getcwd() end), 
     i(1, "nombre"),
     rep(1)
