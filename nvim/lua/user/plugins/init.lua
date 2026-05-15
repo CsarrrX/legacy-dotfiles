@@ -222,14 +222,7 @@ return {
     end,
   },
 
-  -- 7. Autopairs
-  {
-    "windwp/nvim-autopairs",
-    event = "InsertEnter",
-    config = true
-  },
-
-  -- 8. Telescope
+  -- 7. Telescope
   {
     'nvim-telescope/telescope.nvim',
     tag = '0.1.8',
