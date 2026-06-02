@@ -98,3 +98,7 @@ bindsym $mod+Shift+l exec i3lock -u -i ~/.config/assets/background1.jpg
 # Sistema
 bindsym $mod+Shift+p exec systemctl poweroff
 
+# Scripts
+bindsym $mod+Shift+b exec python3 ~/scripts/rofi_libros.py
+bindsym $mod+Shift+m exec python3 ~/scripts/rofi_resumenes.py
+
