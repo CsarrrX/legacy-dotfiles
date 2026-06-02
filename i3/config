@@ -98,5 +98,3 @@ bindsym $mod+Shift+l exec i3lock -u -i ~/.config/assets/background1.jpg
 # Sistema
 bindsym $mod+Shift+p exec systemctl poweroff
 
-# Script de notas 
-bindsym $mod+m exec python3 ~/scripts-notes/scripts/rofi_link.py
