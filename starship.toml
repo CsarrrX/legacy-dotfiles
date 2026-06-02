@@ -1,30 +1,64 @@
-add_newline = false
+"$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
+[░▒▓](#a3aed2)\
+[  ](bg:#a3aed2 fg:#090c0c)\
+[](bg:#769ff0 fg:#a3aed2)\
 $directory\
+[](fg:#769ff0 bg:#394260)\
 $git_branch\
 $git_status\
-$character
-"""
-
-[character]
-success_symbol = "[>](bold white) "
-error_symbol = "[>](bold red) "
+[](fg:#394260 bg:#212736)\
+$c\
+$cpp\
+$lua\
+$tex\
+[](fg:#212736 bg:#1d2230)\
+$time\
+[ ](fg:#1d2230)\
+\n$character"""
 
 [directory]
-style = "fg:white bg:#000080"
-format = "[ $path ]($style) "
+style = "fg:#e3e5e5 bg:#769ff0"
+format = "[ $path ]($style)"
 truncation_length = 3
-truncate_to_repo = true
+truncation_symbol = "…/"
 
 [git_branch]
-symbol = "± "
-style = "bold #C0C0C0"
-format = "[$symbol$branch]($style) "
+symbol = ""
+style = "bg:#394260"
+format = '[[ $symbol $branch ](fg:#769ff0 bg:#394260)]($style)'
 
 [git_status]
-style = "bold red"
-format = "[$all_status$ahead_behind]($style) "
+style = "bg:#394260"
+format = '[[($all_status$ahead_behind )](fg:#769ff0 bg:#394260)]($style)'
 
-[python]
-disabled = true
+# Configuración para C
+[c]
+symbol = " "
+style = "bg:#212736"
+format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+
+# Configuración para C++
+[cpp]
+symbol = " "
+style = "bg:#212736"
+format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+
+# Configuración para Neovim (usando el módulo lua, ya que nvim depende de lua)
+[lua]
+symbol = " "
+style = "bg:#212736"
+format = '[[ nvim ($version) ](fg:#769ff0 bg:#212736)]($style)'
+
+# Configuración para LaTeX
+[tex]
+symbol = "󰔫 "
+style = "bg:#212736"
+format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+
+[time]
+disabled = false
+time_format = "%R"
+style = "bg:#1d2230"
+format = '[[  $time ](fg:#a0a9cb bg:#1d2230)]($style)'
