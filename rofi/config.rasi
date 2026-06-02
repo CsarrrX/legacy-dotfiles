@@ -1,104 +1,86 @@
 configuration {
     modi: "drun";
     show-icons: true;
-    display-drun: "Buscar...";
+    display-drun: "󱓖 ";
     font: "JetBrainsMono Nerd Font 11";
     drun-display-format: "{name}";
 }
 
 * {
-    bg-col:            #D4D0C8;
-    border-col:        #808080;
-    text-col:          #000000;
-    input-bg:          #FFFFFF; 
-    selected-col:      #000080; 
-    selected-text-col: #FFFFFF;
-    
+    bg-col:         #1d2230;
+    bg-col-light:   #212736;
+    border-col:     #769ff0;
+    text-col:       #e3e5e5;
+    text-col-sel:   #a3aed2;
+
     background-color: transparent;
     text-color:       @text-col;
-    margin: 0;
-    padding: 0;
 }
 
 window {
-    width: 400px;
-    height: 400px;
+    width: 450px;
     location: center;
     anchor: center;
-    background-color: @bg-col; 
+    background-color: @bg-col;
     border: 2px;
     border-color: @border-col;
-    border-radius: 0px; 
+    border-radius: 12px;
+    padding: 15px;
 }
 
 mainbox {
-    padding: 10px;
-    children: [ inputbar, listview ];
     background-color: transparent;
+    spacing: 10px;
+    children: [ inputbar, listview ];
 }
 
 inputbar {
-    background-color: @input-bg;
-    border-radius: 0px;
-    border: 2px; 
+    background-color: @bg-col-light;
+    border-radius: 8px;
+    border: 1px;
     border-color: @border-col;
-    padding: 8px;
-    margin: 0 0 10px 0;
+    padding: 10px;
     children: [ prompt, entry ];
 }
 
 prompt {
     padding: 0 10px 0 0;
-    text-color: @text-col;
-    background-color: transparent;
+    text-color: @border-col;
 }
 
 entry {
-    placeholder: "";
+    placeholder: "Buscar...";
     text-color: @text-col;
-    background-color: transparent; 
 }
 
 listview {
     columns: 1;
-    lines: 9;
+    lines: 7;
     background-color: transparent;
-    scrollbar: false;
-    border: 0px;
+    margin: 10px 0 0 0;
 }
 
 element {
     padding: 8px;
-    border-radius: 0px; 
     spacing: 10px;
     background-color: transparent;
     text-color: @text-col;
 }
 
-element normal.normal {
+element normal.normal, element alternate.normal {
     background-color: transparent;
     text-color: @text-col;
 }
 
-element alternate.normal {
-    background-color: transparent; 
-    text-color: @text-col;
-}
-
-element selected.normal {
-    background-color: @selected-col;
-    text-color: @selected-text-col;
-}
-
-element selected.active {
-    background-color: @selected-col;
-    text-color: @selected-text-col;
+element selected.normal, element selected.active {
+    background-color: transparent;
+    text-color: @text-col-sel;
 }
 
 element-text {
     background-color: transparent;
-    text-color:       inherit;
-    vertical-align:   0.5;
+    text-color: inherit;
+    vertical-align: 0.5;
 }
 
 element-icon {

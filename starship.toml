@@ -45,7 +45,7 @@ symbol = " "
 style = "bg:#212736"
 format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
 
-# Configuración para Neovim (usando el módulo lua, ya que nvim depende de lua)
+# Configuración para Neovim 
 [lua]
 symbol = " "
 style = "bg:#212736"
