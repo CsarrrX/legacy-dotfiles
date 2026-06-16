@@ -17,7 +17,7 @@ gaps inner 5
 smart_gaps off
 smart_borders on
 # Hacer que Xournal++ sea un pop-up flotante
-for_window [class="Xournalpp"] floating enable, resize set 1000 700, move position center
+for_window [class="Com.github.xournalpp.xournalpp"] floating enable, resize set 1000 700, move position center
 
 # --- Variables ---
 set $mod Mod4 
