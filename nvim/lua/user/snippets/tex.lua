@@ -312,7 +312,7 @@ return {
             "\\documentclass[11pt, letterpaper]{scrartcl}",
             "\\usepackage[utf8]{inputenc}",
             "\\usepackage[spanish]{babel}",
-            "\\usepackage{amsmath, amssymb, amsthm, amsfonts}",
+            "\\usepackage{amsmath, amssymb, amsthm, amsfonts, mathrsfs}",
             "\\usepackage{geometry}",
             "\\geometry{margin=1in}",
             "",
@@ -345,5 +345,63 @@ return {
             "\\end{document}"
         }),
     }),
+
+    s("zk", {
+    t({
+      "\\documentclass[11pt, letterpaper]{article}",
+      "",
+      "% Importa el preámbulo centralizado",
+      "\\input{../Resumenes/preamble.tex}",
+      "",
+      "% ==============================================================================",
+      "% METADATOS DE LA NOTA",
+      "% ==============================================================================",
+      "\\title{\\sffamily\\bfseries "
+    }),
+    i(1, "Nombre del Concepto"),
+    t({
+      "}",
+      "\\author{\\large César Pérez Amador}",
+      "\\date{\\small \\today}",
+      "",
+      "\\begin{document}",
+      "\\maketitle",
+      "",
+      "\\begin{abstract}",
+      "    \\noindent "
+    }),
+    i(2, "Idea central del concepto en 3 o 4 líneas..."),
+    t({
+      "",
+      "\\end{abstract}",
+      "",
+      "\\vspace{1em}",
+      "",
+      "% ==============================================================================",
+      "% DESARROLLO",
+      "% ==============================================================================",
+      "",
+      "    "
+    }),
+    i(0),
+    t({
+      "",
+      "",
+      "\\end{document}"
+    }),
+  }),
+
+  s("zkl", fmt([[ \href{{run:{}/Zettelkasten/{}.pdf}}{{\textbf{{{}}}}} ]], {
+    f(function() return vim.fn.expand("~/Documentos") end), 
+    i(1, "nombre_archivo"),
+    i(2, "Texto visible")
+  })),
+
+  s("resl", fmt([[ \href{{run:{}/Resumenes/{}/{}.pdf}}{{\textbf{{{}}}}} ]], {
+    f(function() return vim.fn.expand("~/Documentos") end),
+    i(1, "CarpetaMateria"),
+    i(2, "nombre_archivo"),
+    i(3, "Texto visible")
+  })),
 
 }

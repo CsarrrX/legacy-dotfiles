@@ -4,60 +4,32 @@ vim.g.maplocalleader = " "
 
 local keymap = vim.keymap.set
 
--- ATAJOS PARA INKSCAPE FIGURES 
--- Mapeo para modo Insertar: Crear figura con PROMPT de título
-vim.keymap.set('i', '<C-f>', function()
-  -- 1. Pedir el título al usuario
-  local title = vim.fn.input('Título de la figura: ')
-  
-  -- Si el usuario cancela (Esc) o deja vacío, no hacemos nada
-  if title == "" then 
-    print("Creación cancelada")
-    return 
-  end
+-- Figuras rápidas
 
-  -- 2. Salimos de modo insertar
-  vim.cmd('stopinsert')
-  
-  -- 3. Verificación de VimTeX
-  if not vim.b.vimtex or not vim.b.vimtex.root then
-    print("Error: VimTeX no detectado")
-    return
-  end
+vim.keymap.set('n', '<leader>df', function()
+    local fig_name = vim.fn.input('Nombre de figura: ')
+    if fig_name == '' then return end
 
-  local fig_path = vim.b.vimtex.root .. '/figures/'
-  
-  -- 4. Construimos el comando con el título que ingresamos en el input
-  local cmd = string.format("inkscape-figures create '%s' '%s'", title, fig_path)
-  
-  -- 5. Ejecutamos y capturamos la salida para insertar el bloque LaTeX
-  -- Usamos 'r !' para insertar el resultado del comando en el buffer
-  vim.cmd('r !' .. cmd)
-  
-  -- 6. Limpieza y guardado
-  vim.cmd('w')
-  vim.cmd('redraw!')
-  end, { desc = "Crear figura de Inkscape con título personalizado" })
+    -- 2. Obtener las rutas
+    local doc_dir = vim.fn.expand('%:p:h')
+    local script_path = vim.fn.expand('~/legacy-dotfiles/scripts/draw_fig.sh') -- Ajusta si lo guardaste en otro lado
 
-  -- Mapeo para modo Normal: Editar figura existente
-  vim.keymap.set('n', '<C-f>', function()
-  -- 1. Verificación de VimTeX (igual que en tu script de creación)
-  if not vim.b.vimtex or not vim.b.vimtex.root then
-    print("Error: VimTeX no detectado")
-    return
-  end
-
-  local fig_path = vim.b.vimtex.root .. '/figures/'
-  
-  -- 2. Construimos el comando de edición
-  -- Usamos '&' al final para que se ejecute en segundo plano y no bloquee Neovim
-  -- Redirigimos la salida a /dev/null para que no ensucie la pantalla
-  local cmd = string.format("inkscape-figures edit '%s' > /dev/null 2>&1 &", fig_path)
-  
-  -- 3. Ejecutamos el comando
-  os.execute(cmd)
-  
-  -- 4. Redibujamos la pantalla para limpiar cualquier artefacto visual
-  vim.cmd('redraw!')
-  end, { desc = "Editar figura de Inkscape existente" })
-
+    -- 3. Ejecutar el script de Bash en segundo plano
+    vim.fn.jobstart({script_path, fig_name, doc_dir}, {
+        on_exit = function()
+            -- 4. Cuando cierras Xournal++, se inserta este bloque de LaTeX
+            local snippet = string.format(
+                "\\begin{figure}[htpb]\n    \\centering\n    \\includegraphics[width=0.8\\textwidth]{figures/%s.pdf}\n\\end{figure}\n",
+                fig_name
+            )
+            
+            -- Insertar el texto debajo del cursor
+            local pos = vim.api.nvim_win_get_cursor(0)
+            local row = pos[1]
+            local lines = vim.split(snippet, '\n')
+            vim.api.nvim_buf_set_lines(0, row, row, false, lines)
+            
+            print("\nFigura '" .. fig_name .. "' importada con éxito.")
+        end
+    })
+end, { desc = "Dibujo rápido y auto-importar a LaTeX" })

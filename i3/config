@@ -16,6 +16,8 @@ gaps outer 10
 gaps inner 5
 smart_gaps off
 smart_borders on
+# Hacer que Xournal++ sea un pop-up flotante
+for_window [class="Xournalpp"] floating enable, resize set 1000 700, move position center
 
 # --- Variables ---
 set $mod Mod4 
@@ -99,6 +101,7 @@ bindsym $mod+Shift+l exec i3lock -u -i ~/.config/assets/background1.jpg
 bindsym $mod+Shift+p exec systemctl poweroff
 
 # Scripts
-bindsym $mod+Shift+b exec python3 ~/scripts/rofi_libros.py
-bindsym $mod+Shift+m exec python3 ~/scripts/rofi_resumenes.py
+bindsym $mod+Shift+b exec zsh -c "python3 ~/legacy-dotfiles/scripts/rofi_libros.py"
+bindsym $mod+Shift+m exec zsh -c -li "python3 ~/legacy-dotfiles/scripts/rofi_resumenes.py"
+bindsym $mod+Shift+z exec kitty --directory ~/Documentos/Zettelkasten nvim .
 
