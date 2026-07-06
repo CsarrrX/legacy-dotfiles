@@ -188,7 +188,7 @@ return {
   s("NN", { t("\\mathbb{N}") }),
   s("CC", { t("\\mathbb{C}") }),
 
-  s("cc",    { t("\\subset ") }),
+  s("cc",    { t("\\subseteq ") }),
   s("inn",   { t("\\in ") }),
   s("notin", { t("\\not\\in ") }),
   s("uu",    { t("\\cup ") }),
