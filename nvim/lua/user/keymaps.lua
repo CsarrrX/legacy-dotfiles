@@ -6,7 +6,7 @@ local keymap = vim.keymap.set
 
 -- Figuras rápidas
 
-vim.keymap.set('n', '<leader>df', function()
+vim.keymap.set('n', '<leader>qf', function()
     local fig_name = vim.fn.input('Nombre de figura: ')
     if fig_name == '' then return end
 
@@ -33,3 +33,35 @@ vim.keymap.set('n', '<leader>df', function()
         end
     })
 end, { desc = "Dibujo rápido y auto-importar a LaTeX" })
+
+
+-- Figuras inkscape
+local function get_vimtex_root()
+  return vim.b.vimtex and vim.b.vimtex.root or "."
+end
+
+-- 1. Modo Insertar (<C-f>): Crear figura
+vim.keymap.set('i', '<C-f>', function()
+  local root = get_vimtex_root()
+  local line = vim.fn.getline('.')
+  
+  -- Construimos el comando exacto. Al usar expr = true, Neovim 
+  -- interpretará este string devuelto como las teclas que debe presionar.
+  return string.format(
+    '<Esc>:silent exec \'.!inkscape-figures create "%s" "%s/figures/"\'<CR><CR>:w<CR>',
+    line,
+    root
+  )
+end, { expr = true, silent = true, desc = "Crear figura con Inkscape" })
+
+-- 2. Modo Normal (<C-f>): Editar figura
+vim.keymap.set('n', '<C-f>', function()
+  local root = get_vimtex_root()
+  
+  -- En Neovim moderno, `jobstart` ejecuta procesos asíncronos en segundo plano 
+  -- nativamente, sin bloquear la UI ni requerir :redraw!
+  local cmd = string.format('inkscape-figures edit "%s/figures/"', root)
+  vim.fn.jobstart(cmd)
+  
+end, { silent = true, desc = "Editar figura con Inkscape en segundo plano" })
+
