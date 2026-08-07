@@ -5,7 +5,7 @@
   // Opciones logo
   "logo": {
     "type": "builtin",
-    "source": "fedora",
+    "source": "fedora_small",
     "padding": {
       "top": 1,
       "left": 2,
