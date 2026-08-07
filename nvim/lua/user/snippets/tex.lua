@@ -181,10 +181,10 @@ return {
   -- FIN DE ESPACIOS MÉTRICOS, NORMAS Y PRODUCTOS INTERNOS --
   
   -- TOPOLOGÍA 
-  s("cl", { t("\\cl ") }),
-  s("int", { t("\\int ") }),
-  s("fr", { t("\\fr ") }),
-  s("ext", { t("\\ext ") }),
+  s("cl", { t("\\cl") }),
+  s("int", { t("\\int") }),
+  s("fr", { t("\\fr") }),
+  s("ext", { t("\\ext") }),
   -- FIN DE TOPOLOGÍA 
 
   -- TEORÍA DE CATEGORÍAS 
