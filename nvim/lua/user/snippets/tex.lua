@@ -5,18 +5,21 @@ local f = ls.function_node
 local rep = require("luasnip.extras").rep 
 
 return {
+
+  -- ENTORNOS --
   s("beg", {
     t("\\begin{"), i(1), t("}"),
     t({ "", "\t" }), i(0),
     t({ "", "\\end{" }), rep(1), t("}"),
   }),
   
+  s("chap", { t("\\chapter{"), i(1), t("}"), i(0) }),
   s("sec",  { t("\\section{"), i(1), t("}"), i(0) }),
   s("sub",  { t("\\subsection{"), i(1), t("}"), i(0) }),
   s("ssub", { t("\\subsubsection{"), i(1), t("}"), i(0) }),
   
-  s("mk", { t("$"), i(1), t("$"), i(0) }),
-  s("dm", { t("\\["), t({ "", "\t" }), i(1), t({ "", "\\]" }), i(0) }),
+  s("mk",   { t("$"), i(1), t("$"), i(0) }),
+  s("dm",   { t("\\["), t({ "", "\t" }), i(1), t({ "", "\\]" }), i(0) }),
 
   s("def", {
     t("\\begin{definicion}"),
@@ -32,10 +35,24 @@ return {
     i(0),
   }),
 
+  s("prop", {
+    t("\\begin{proposicion}"),
+    t({ "", "\t" }), i(1),
+    t({ "", "\\end{proposicion}" }),
+    i(0),
+  }),
+
   s("lem", {
     t("\\begin{lema}"),
     t({ "", "\t" }), i(1),
     t({ "", "\\end{lema}" }),
+    i(0),
+  }),
+
+  s("cor", {
+    t("\\begin{corolario}"),
+    t({ "", "\t" }), i(1),
+    t({ "", "\\end{corolario}" }),
     i(0),
   }),
 
@@ -60,20 +77,6 @@ return {
     i(0),
   }),
 
-  s("prop", {
-    t("\\begin{proposicion}"),
-    t({ "", "\t" }), i(1),
-    t({ "", "\\end{proposicion}" }),
-    i(0),
-  }),
-
-  s("obs", {
-    t("\\begin{observacion}"),
-    t({ "", "\t" }), i(1),
-    t({ "", "\\end{observacion}" }),
-    i(0),
-  }),
-
   s("enum", {
     t("\\begin{enumerate}[label=\\Roman*.]"),
     t({ "", "\t" }), i(1),
@@ -82,95 +85,36 @@ return {
   }),
 
   s("lbl", { t("\\label{"), i(1), t("}") }),
-
-  s("ff", { t("\\frac{"), i(1), t("}{"), i(2), t("}") }),
-  s("bn", { t("\\binom{"), i(1), t("}{"), i(2), t("}") }),
-  s("sq",  { t("\\sqrt{"), i(1), t("}") }),
-  s("td",  { t("^{"), i(1), t("}") }),
-  s("sb", { t("_{"), i(1), t("}") }),
+  -- FIN DE ENTORNOS --
   
-  s("dint", { t("\\int_{"), i(1, "-\\infty"), t("}^{"), i(2, "\\infty"), t("} ") }),
-  s("int",  { t("\\int ") }),
-
-  s("sum",  { t("\\sum_{"), i(1, "i=1"), t("}^{"), i(2, "n"), t("} ") }),
-  s("prod", { t("\\prod_{"), i(1, "i=1"), t("}^{"), i(2, "n"), t("} ") }),
-  s("lim",  { t("\\lim_{"), i(1, "x"), t("\\to "), i(2, "\\infty"), t("} ") }),
-
-  s("df",   { t("\\frac{d}{d"), i(1, "x"), t("} ") }),
-  s("part", { t("\\frac{\\partial}{\\partial "), i(1, "x"), t("} ") }),
-
-  s("dfn", {
-    t("\\frac{d^{"), i(1, "n"), t("}}{d"),
-    i(2, "x"), t("^{"), rep(1), t("}} ")
-  }),
-
-  s("lin1", {
-    t("\\frac{dy}{dx} + "), i(1, "P(x)"),
-    t("y = "), i(2, "Q(x)")
-  }),
-
-  s("lin2", {
-    t("\\frac{d^2y}{dx^2} + "), i(1, "a"),
-    t("\\frac{dy}{dx} + "), i(2, "b"),
-    t("y = "), i(3, "g(x)")
-  }),
-
-  s("fi", {
-    t("\\mu("), i(1, "x"),
-    t(") = e^{\\int "), i(2, "P(x)"), t("\\,dx}")
-  }),
-
-  s("ci", {
-    t("y("), i(1, "0"), t(") = "), i(2)
-  }),
-
-  s("lap",  { t("\\mathcal{L}\\{"), i(1), t("\\}") }),
-  s("ilap", { t("\\mathcal{L}^{-1}\\{"), i(1), t("\\}") }),
-
-  s("dydx", { 
-    t("\\frac{dy}{dx}"), i(0) 
-  }),
-
-  s("dv", { 
-    t("\\frac{d"), i(1, "y"), t("}{d"), i(2, "x"), t("}") 
-  }),
-
-  s("deleps", {
-    t("\\forall\\,\\varepsilon > 0,\\; \\exists\\,\\delta > 0\\; \\text{tal que si } "),
-    t("0 < |x - "), i(1, "a"), t("| < \\delta"),
-    t("\\text{ entonces } "),
-    t("|f(x) - "), i(2, "L"), t("| < \\varepsilon")
-  }),
-
-  -- Letras Griegas Minúsculas
-  s("al", { t("\\alpha") }),
-  s("be", { t("\\beta") }),
-  s("ga", { t("\\gamma") }),
-  s("de", { t("\\delta") }),
-  s("ep", { t("\\epsilon") }),
+  -- LETRAS GRIEGAS --
+  s("al",  { t("\\alpha") }),
+  s("be",  { t("\\beta") }),
+  s("ga",  { t("\\gamma") }),
+  s("de",  { t("\\delta") }),
+  s("ep",  { t("\\epsilon") }),
   s("vep", { t("\\varepsilon") }),
-  s("ze", { t("\\zeta") }),
-  s("et", { t("\\eta") }),
-  s("th", { t("\\theta") }),
+  s("ze",  { t("\\zeta") }),
+  s("et",  { t("\\eta") }),
+  s("th",  { t("\\theta") }),
   s("vth", { t("\\vartheta") }),
-  s("io", { t("\\iota") }),
-  s("ka", { t("\\kappa") }),
-  s("la", { t("\\lambda") }),
-  s("mu", { t("\\mu") }),
-  s("nu", { t("\\nu") }),
-  s("xi", { t("\\xi") }),
-  s("pi", { t("\\pi") }),
+  s("io",  { t("\\iota") }),
+  s("ka",  { t("\\kappa") }),
+  s("la",  { t("\\lambda") }),
+  s("mu",  { t("\\mu") }),
+  s("nu",  { t("\\nu") }),
+  s("xi",  { t("\\xi") }),
+  s("pi",  { t("\\pi") }),
   s("rho", { t("\\rho") }),
-  s("si", { t("\\sigma") }),
+  s("si",  { t("\\sigma") }),
   s("tau", { t("\\tau") }),
-  s("up", { t("\\upsilon") }),
+  s("up",  { t("\\upsilon") }),
   s("phi", { t("\\phi") }),
   s("vph", { t("\\varphi") }),
   s("chi", { t("\\chi") }),
   s("psi", { t("\\psi") }),
-  s("om", { t("\\omega") }),
+  s("om",  { t("\\omega") }),
 
-  -- Letras Griegas Mayúsculas (las que no son iguales al latín)
   s("Ga", { t("\\Gamma") }),
   s("De", { t("\\Delta") }),
   s("Th", { t("\\Theta") }),
@@ -181,134 +125,118 @@ return {
   s("Ph", { t("\\Phi") }),
   s("Ps", { t("\\Psi") }),
   s("Om", { t("\\Omega") }),
+  -- FIN DE LETRAS GRIEGAS --
+  
+  -- LETRAS ESTILIZADAS -- 
+  s("cal",  { t("\\mathcal{"), i(1), t("}") }),
+  s("frak", { t("\\mathfrak{"), i(1), t("}") }),
+  s("scr",  { t("\\mathscr{"), i(1), t("}") }),
+  s("bb",   { t("\\mathbb{"), i(1), t("}") }),
 
-  s("RR", { t("\\mathbb{R}") }),
-  s("QQ", { t("\\mathbb{Q}") }),
-  s("ZZ", { t("\\mathbb{Z}") }),
-  s("NN", { t("\\mathbb{N}") }),
-  s("CC", { t("\\mathbb{C}") }),
+  s("bf",   { t("\\textbf{"), i(1), t("}") }),
+  s("it",   { t("\\textit{"), i(1), t("}") }),
+  -- FIN DE LETRAS ESTILIZADAS -- 
+  
+  -- LÓGICA
+  s("imp",  { t("\\implies ") }),
+  s("iff",  { t("\\iff ") }),
+  s("fa",   { t("\\forall ") }),
+  s("ex",   { t("\\exists ") }),
+  s("lor",  { t("\\lor ") }),
+  s("land", { t("\\land ") }),
+  s("lnot", { t("\\lnot ") }),
+  s("neq",  { t("\\neq ") }),
+  -- FIN DE LÓGICA
 
+  -- TEORÍA DE CONJUNTOS -- 
+  s("set",   { t("\\{"), i(1), t("\\}") }),
+  s("in",    { t("\\in ") }),
+  s("notin", { t("\\notin ") }),
   s("cc",    { t("\\subseteq ") }),
-  s("inn",   { t("\\in ") }),
-  s("notin", { t("\\not\\in ") }),
   s("uu",    { t("\\cup ") }),
   s("nn",    { t("\\cap ") }),
-  s("set",   { t("\\{"), i(1), t("\\}") }),
-  s("emp",   { t("\\emptyset") }),
-  s("UU",  { t("\\bigcup_{"), i(1, "i=1"), t("}^{"), i(2, "n"), t("} ") }),
-  s("NN1", { t("\\bigcap_{"), i(1, "i=1"), t("}^{"), i(2, "n"), t("} ") }),
-
-  s("imp", { t("\\implies ") }),
-  s("iff", { t("\\iff ") }),
-  s("fa",  { t("\\forall ") }),
-  s("ex",  { t("\\exists ") }),
-  s("lor", { t("\\lor ") }),
-  s("land", { t("\\land ") }),
+  s("pc",    { t("\\times ") }),
+  s("UU",    { t("\\bigcup ") }),
+  s("NN",    { t("\\bigcap ") }),
+  s("PC",    { t("\\bigtimes ") }),
+  s("to",    { t("\\to ") }),
+  s("dom",   { t("\\dom ") }),
+  s("cod",   { t("\\cod ") }),
+  s("ran",   { t("\\ran ") }),
+  s("circ",  { t("\\circ ") }),
+  s("cong",  { t("\\cong") }),
+  s("sim",   { t("\\sim ") }),
+  s("le",    { t("\\le ") }),
+  s("ge",    { t("\\ge ") }),
+  s("leq",   { t("\\leq ") }),
+  s("geq",   { t("\\geq ") }),
+  -- FIN DE TEORÍA DE CONJUNTOS --
   
+  -- ESPACIOS MÉTRICOS, NORMAS Y PRODUCTOS INTERNOS -- 
+  s("dist", { t("d("), i(1), t(", "), i(2), t(")") }),
+  s("ball", { t("B_{"), i(1), t("}("), i(2), t(")") }),
+  s("cball", { t("\\overline{B}_{"), i(1), t("}("), i(2), t(")") }),
+  s("inp", { t("\\langle "), i(1), t(", "), i(2), t(" \\rangle") }),
+  s("pnorm", { t("\\|"), i(1), t("\\|_{"), i(2), t("}") }),
+  -- FIN DE ESPACIOS MÉTRICOS, NORMAS Y PRODUCTOS INTERNOS --
+  
+  -- TOPOLOGÍA 
+  s("cl", { t("\\cl ") }),
+  s("int", { t("\\int ") }),
+  s("fr", { t("\\fr ") }),
+  s("ext", { t("\\ext ") }),
+  -- FIN DE TOPOLOGÍA 
+
+  -- TEORÍA DE CATEGORÍAS 
+  s("hom", { t("\\Hom_{"), i(1), t("}("), i(2), t(", "), i(3), t(")") }),
+  s("obj", { t("\\Ob("), i(1), t(")") }),
+  s("func", { i(1), t(" : \\mathcal{"), i(2), t("} \\to \\mathcal{"), i(3), t("}") }),
+
+  s("cSet", { t("\\mathbf{Set}") }),
+  s("cTop", { t("\\mathbf{Top}") }),
+  s("cGrp", { t("\\mathbf{Grp}") }),
+  s("cAb", { t("\\mathbf{Ab}") }),
+  s("cRng", { t("\\mathbf{Ring}") }),
+  s("cMod", { t("\\mathbf{Mod}") }),
+  s("cVect", { t("\\mathbf{Vect}") }),
+  -- FIN DE TEORÍA DE CATEGORÍAS 
+  
+  -- ÁLGEBRA 
+  s("nsub", { t("\\triangleleft ") }),
+  s("oplus", { t("\\oplus ") }),
+  s("Oplus", { t("\\bigoplus ") }),
+  s("otim", { t("\\otimes ") }),
+  s("Otim", { t("\\bigotimes ") }),
+  s("gen", { t("\\langle "), i(1), t(" \\rangle") }),
+  s("ker", { t("\\ker ") }),
+  s("aut", { t("\\Aut("), i(1), t(")") }),
+  s("deg", { t("["), i(1), t(" : "), i(2), t("]") }),
+  -- FIN DE ÁLGEBRA
+  
+  -- OPERADORES -- 
+  s("int",    { t("\\int ") }),
+  s("sum",    { t("\\sum ") }),
+  s("prod",   { t("\\prod ") }),
+  s("lim",    { t("\\lim ") }),
+  -- FIN DE OPERADORES -- 
+
+  -- GENERALES -- 
+  s("td",  { t("^{"), i(1), t("}") }),
+  s("sb",  { t("_{"), i(1), t("}") }),
+  s("ff",  { t("\\frac{"), i(1), t("}{"), i(2), t("}") }),
+  s("bin", { t("\\binom{"), i(1), t("}{"), i(2), t("}") }),
   s("lr",  { t("\\left( "), i(1), t("\\right)") }),
   s("lr[", { t("\\left[ "), i(1), t("\\right]") }),
   s("lr{", { t("\\left\\{ "), i(1), t("\\right\\}") }),
   s("lra", { t("\\left\\langle "), i(1), t("\\right\\rangle") }),
   s("norm",{ t("\\| "), i(1), t("\\|") }),
   s("abs", { t("\\left| "), i(1), t("\\right|") }),
-  s("interv", { t("\\left[ "), i(1), t("\\right]") }),
-
-  s("bf",  { t("\\textbf{"), i(1), t("}") }),
-  s("mbf",  { t("\\mathbf{"), i(1), t("}") }),
-  s("it",  { t("\\textit{"), i(1), t("}") }),
   s("txt", { t("\\text{"), i(1), t("}") }),
-  s("cal",  { t("\\mathcal{"), i(1), t("}") }),
-  s("frak",  { t("\\mathfrak{"), i(1), t("}") }),
-  s("scr",  { t("\\mathscr{"), i(1), t("}") }),
-
   s("inf", { t("\\infty") }),
-  s("cd",  { t("\\cdot") }),
+  -- FIN DE GENERALES --
 
-  s({ trig = "([a-zA-Z])(%d+)", regTrig = true, wordTrig = false }, {
-    f(function(_, snip)
-      return snip.captures[1] .. "_{" .. snip.captures[2] .. "}"
-    end)
-  }),
 
-  s({ trig = "([a-zA-Z])vv", regTrig = true, wordTrig = false }, {
-    f(function(_, snip)
-      return "\\vec{" .. snip.captures[1] .. "}"
-    end)
-  }),
-
-  s("fsig",  { t("\\mathcal{F}") }),
-  s("prob",  { t("\\mathrm{P}("), i(1), t(")") }),
-  s("EE",    { t("\\mathbf{E}\\left["), i(1), t("\\right]") }),
-  s("Var",   { t("\\text{Var}("), i(1), t(")") }),
-  s("cov",   { t("\\text{Cov}("), i(1), t(", "), i(2), t(")") }),
-  
-  s("espprob", {
-    t("("), t("\\Omega, "), t("\\mathcal{F}, "), t("\\mathrm{P}"), t(")")
-  }),
-
-  s("va",    { t("X: \\Omega \\to "), i(1, "\\mathbb{R}") }),
-  s("convp", { t("\\xrightarrow{P}") }),
-  s("convd", { t("\\xrightarrow{d}") }),
-  s("convas",{ t("\\xrightarrow{c.s.}") }),
-
-  s("dist",  { t("\\sim "), i(1) }),
-  s("normal",{ t("\\mathcal{N}("), i(1, "\\mu"), t(", "), i(2, "\\sigma^2"), t(")") }),
-  s("binom", { t("\\text{Bin}("), i(1, "n"), t(", "), i(2, "p"), t(")") }),
-  s("pois",  { t("\\text{Poisson}("), i(1, "\\lambda"), t(")") }),
-  
-  s("pc", {
-    t("\\mathrm{P}("), i(1, "A"), t(" | "), i(2, "B"), t(")"), i(0)
-  }),
-
-  s("pdef", {
-    t("\\mathrm{P}("), i(1, "A"), t(" | "), i(2, "B"), t(") = \\frac{\\mathrm{P}("), 
-    rep(1), t(" \\cap "), rep(2), t(")}{\\mathrm{P}("), rep(2), t(")}"), i(0)
-  }),
-
-  s("bayes", {
-    t("\\mathrm{P}("), i(1, "A_i"), t("|"), i(2, "B"), t(") = "),
-    t("\\frac{\\mathrm{P}("), rep(2), t("|"), rep(1), t(")\\mathrm{P}("), rep(1), t(")}{\\sum_{j=1}^{n} \\mathrm{P}("), rep(2), t("|A_j) \\mathrm{P}(A_j)}"), i(0)
-  }),
-
-  s("ee", { t("e^{"), i(1), t("}") }),
-  s("can", { t("\\cancel{"), i(1), t("}") }),
-  s("ind", {
-    t("\\mathbf{1}_{"), i(1, "A"), t("}")
-  }),
-  s("id", {
-    t("\\mathbf{I}_{"), i(1, "A"), t("}")
-  }),
-
-  s("ann", { t("a_{\\overline{"), i(1, "n"), t("|} "), i(2, "i"), i(0) }),
-  s("annf", { t("s_{\\overline{"), i(1, "n"), t("|} "), i(2, "i"), i(0) }),
-  s("annu", { t("\\ddot{a}_{\\overline{"), i(1, "n"), t("|} "), i(2, "i"), i(0) }),
-  s("inom", { t("i^{("), i(1, "m"), t(")}"), i(0) }),
-  s("ddesc", { t("d_{\\overline{"), i(1, "n"), t("|} "), i(0) }),
-  s("vdis", { t("v = (1 + i)^{-1}"), i(0) }),
-  s("monto", { t("C("), i(1, "1+i"), t(")^{"), i(2, "n"), t("}"), i(0) }),
-  s("vpa", { t("R \\left[ \\frac{1 - (1 + "), i(1, "i"), t(")^{-"), i(2, "n"), t("}}{"), rep(1), t("} \\right]"), i(0) }),
-  s("grad", { t("\\frac{G}{i} \\left[ \\frac{(1+i)^n - 1}{i} - n \\right]"), i(0) }),
-  s("fai", { t("(1 + i)^{"), i(1, "n"), t("}"), i(0) }),
-  s("fvi", { t("(1 + i)^{-"), i(1, "n"), t("}"), i(0) }),
-  s("ik", { t("i_{"), i(1, "k"), t("}"), i(0) }),
-  s("ln", { t("\\ln\\left( "), i(1), t(" \\right)"), i(0) }),
-  s("usum", { t("U(f, \\mathcal{P})"), i(0) }),
-  s("lsum", { t("L(f, \\mathcal{P})"), i(0) }),
-
-  s("prt", {
-    t("\\mathcal{P} = \\{t_0, t_1, \\dots, t_n\\}"), i(0)
-  }),
-
-  s("epscrit", {
-    t("U(f, \\mathcal{P}) - L(f, \\mathcal{P}) < \\varepsilon"), i(0)
-  }),
-
-  s("xour", fmt([[ \href{{run:{}/hand/{}.pdf}}{{[Desarrollo: {}]}} ]], {
-    f(function() return vim.fn.getcwd() end), 
-    i(1, "nombre"),
-    rep(1)
-  })),
-
+  -- PRESETS RÁPIDAS
   s("pset", {
         t({
             "\\documentclass[11pt, letterpaper]{scrartcl}",
@@ -392,18 +320,6 @@ return {
       "\\end{document}"
     }),
   }),
-
-  s("zkl", fmt([[ \href{{run:{}/Zettelkasten/{}.pdf}}{{\textbf{{{}}}}} ]], {
-    f(function() return vim.fn.expand("~/Documentos") end), 
-    i(1, "nombre_archivo"),
-    i(2, "Texto visible")
-  })),
-
-  s("resl", fmt([[ \href{{run:{}/Resumenes/{}/{}.pdf}}{{\textbf{{{}}}}} ]], {
-    f(function() return vim.fn.expand("~/Documentos") end),
-    i(1, "CarpetaMateria"),
-    i(2, "nombre_archivo"),
-    i(3, "Texto visible")
-  })),
+  -- FIN DE PRESETS
 
 }
