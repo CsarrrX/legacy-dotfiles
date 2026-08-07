@@ -2,7 +2,7 @@
 set -e
 
 # ================================
-# Dotfiles Bootstrap Script (Fedora + i3)
+# Dotfiles Bootstrap Script 
 # ================================
 echo "[*] Instalando paquetes del sistema y herramientas de compilación..."
 sudo dnf install -y \

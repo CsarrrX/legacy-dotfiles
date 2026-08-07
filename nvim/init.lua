@@ -1,2 +1,2 @@
--- Importamos la configuración de /user
+-- Configuración de /user
 require("user")

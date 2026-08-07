@@ -1,3 +1,4 @@
+-- Config general
 local ls = require("luasnip")
 local types = require("luasnip.util.types")
 
@@ -7,5 +8,5 @@ ls.config.set_config({
   enable_autosnippets = true, 
 })
 
--- Cargar snippets desde archivos lua en la carpeta user/snippets
+-- Cargar snippets desde /snippets
 require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/lua/user/snippets" })

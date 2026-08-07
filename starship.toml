@@ -1,5 +1,7 @@
+# Config general
 "$schema" = 'https://starship.rs/config-schema.json'
 
+# Personalización general
 format = """
 [░▒▓](#a3aed2)\
 [  ](bg:#a3aed2 fg:#090c0c)\
@@ -18,12 +20,14 @@ $time\
 [ ](fg:#1d2230)\
 \n$character"""
 
+# Directorio actual
 [directory]
 style = "fg:#e3e5e5 bg:#769ff0"
 format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
 
+# Git
 [git_branch]
 symbol = ""
 style = "bg:#394260"
@@ -33,6 +37,7 @@ format = '[[ $symbol $branch ](fg:#769ff0 bg:#394260)]($style)'
 style = "bg:#394260"
 format = '[[($all_status$ahead_behind )](fg:#769ff0 bg:#394260)]($style)'
 
+# Lenguajes de programación
 [c]
 symbol = " "
 style = "bg:#212736"
@@ -48,6 +53,7 @@ symbol = " "
 style = "bg:#212736"
 format = '[[ nvim ($version) ](fg:#769ff0 bg:#212736)]($style)'
 
+# Hora 
 [time]
 disabled = false
 time_format = "%R"

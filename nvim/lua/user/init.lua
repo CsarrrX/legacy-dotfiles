@@ -1,7 +1,7 @@
--- 1. Definir la ruta donde se instalará el gestor de plugins (Lazy)
+-- Ruta donde se instalará Lazy
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
--- 2. Si no existe, clonarlo de GitHub automáticamente (BOOTSTRAP)
+-- Clonarlo de GitHub automáticamente
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
     "git",
@@ -13,16 +13,16 @@ if not vim.loop.fs_stat(lazypath) then
   })
 end
 
--- 3. Añadir Lazy al "runtime path" de vim para poder usarlo
+-- Añadir Lazy al "runtime path" de vim para poder usarlo
 vim.opt.rtp:prepend(lazypath)
 
--- 4. Cargar nuestras configuraciones básicas 
+-- Cargar configuraciones básicas 
 require("user.options")
 require("user.keymaps")
 
--- 5. Iniciar Lazy y decirle dónde están los plugins
+-- Iniciar Lazy 
 require("lazy").setup("user.plugins")
 
--- 6. Cargar configuración de snippets
+-- Cargar configuración de snippets
 pcall(require, "user.snippets_config")
 

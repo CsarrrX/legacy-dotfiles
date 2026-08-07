@@ -10,7 +10,7 @@ $pdf_mode = 1;
 # Synctex siempre
 $pdflatex = 'pdflatex -synctex=1 -interaction=nonstopmode -shell-escape %O %S';
 
-# Limpieza más agresiva
+# Limpieza
 $clean_ext .= ' acn acr alg glg glo gls fls fdb_latexmk synctex.gz';
 
 # Usamos zathura 

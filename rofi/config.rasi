@@ -1,3 +1,4 @@
+/* Configuración general */
 configuration {
     modi: "drun";
     show-icons: true;
@@ -6,6 +7,7 @@ configuration {
     drun-display-format: "{name}";
 }
 
+/* Variables globales */
 * {
     bg-col:         #1d2230;
     bg-col-light:   #212736;
@@ -17,6 +19,7 @@ configuration {
     text-color:       @text-col;
 }
 
+/* Ventana principal */
 window {
     width: 450px;
     location: center;
@@ -28,12 +31,14 @@ window {
     padding: 15px;
 }
 
+/* Contenedor principal */
 mainbox {
     background-color: transparent;
     spacing: 10px;
     children: [ inputbar, listview ];
 }
 
+/* Barra búsqueda */
 inputbar {
     background-color: @bg-col-light;
     border-radius: 8px;
@@ -43,16 +48,19 @@ inputbar {
     children: [ prompt, entry ];
 }
 
+/* Icono búsqueda */
 prompt {
     padding: 0 10px 0 0;
     text-color: @border-col;
 }
 
+ /* Entrada texto */
 entry {
     placeholder: "Buscar...";
     text-color: @text-col;
 }
 
+/* Lista resultados */
 listview {
     columns: 1;
     lines: 7;
@@ -60,6 +68,7 @@ listview {
     margin: 10px 0 0 0;
 }
 
+/* Elemento lista */
 element {
     padding: 8px;
     spacing: 10px;
@@ -67,22 +76,26 @@ element {
     text-color: @text-col;
 }
 
+/* Elemento inactivo */
 element normal.normal, element alternate.normal {
     background-color: transparent;
     text-color: @text-col;
 }
 
+/* Elemento seleccionado */
 element selected.normal, element selected.active {
     background-color: transparent;
     text-color: @text-col-sel;
 }
 
+/* Texto elemento */
 element-text {
     background-color: transparent;
     text-color: inherit;
     vertical-align: 0.5;
 }
 
+/* Icono elemento */
 element-icon {
     background-color: transparent;
     size: 24px;

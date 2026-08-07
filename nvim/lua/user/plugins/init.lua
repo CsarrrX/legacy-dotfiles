@@ -1,13 +1,14 @@
 return {
-  -- 1. Estética (Tokyo Night)
+  -- ESTÉTICA --
   {
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
     config = function() vim.cmd([[colorscheme tokyonight]]) end,
   }, 
+  -- FIN DE ESTÉTICA --
 
-  -- 2. VimTex 
+  -- VIMTEX -- 
   {
     "lervag/vimtex",
     lazy = false,
@@ -17,8 +18,9 @@ return {
       vim.keymap.set('n', '<leader>lc', '<cmd>VimtexCompile<CR>', { desc = 'Compilación continua (Toggle)' })
     end,
   },
+  -- FIN DE VIMTEX --
 
-  -- 3. LuaSnip (Modo Standalone)
+  -- LUASNIP --
   {
     "L3MON4D3/LuaSnip",
     lazy = false, 
@@ -36,7 +38,7 @@ return {
 
       local keymap = vim.keymap.set
       
-      -- Tecla TAB inteligente
+      -- Tecla TAB 
       keymap({"i", "s"}, "<Tab>", function()
         if ls.expand_or_jumpable() then
           ls.expand_or_jump()
@@ -51,12 +53,13 @@ return {
         end
       end, { silent = true })
       
-      -- Recargar config con <Espacio> + r
+      -- Recargar config 
       keymap("n", "<leader>r", ":source ~/.config/nvim/init.lua<CR>", { desc = "Recargar Config" })
     end,
   },
+  -- FIN DE LUASNIP --
     
-  -- 4. Autocompletado
+  -- AUTOCOMPLETADO -- 
     {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
@@ -111,16 +114,15 @@ return {
       })
     end,
   },
+  -- FIN DE AUTOCOMPLETADO -- 
 
-  -- 5. LSP nativo 
+  -- LSP --
   {
     "neovim/nvim-lspconfig",
       lazy = false,
       config = function()
     
-      -- ==========================
       -- PYTHON
-      -- ==========================
       vim.lsp.config.pyright = {
         cmd = { "pyright-langserver", "--stdio" },
         root_markers = { "pyproject.toml", ".git" },
@@ -135,9 +137,7 @@ return {
         end,
       })
   
-      -- ==========================
       -- C / C++
-      -- ==========================
       vim.lsp.config.clangd = {
         cmd = { "clangd" },
         root_markers = { "compile_commands.json", ".git" },
@@ -152,9 +152,7 @@ return {
         end,
       })
   
-      -- ==========================
-      -- LaTeX (TEXLAB)
-      -- ==========================
+      -- LaTeX 
       vim.lsp.config.texlab = {
         cmd = { "texlab" },
         filetypes = { "tex", "plaintex", "bib" },
@@ -205,9 +203,7 @@ return {
         end,
       })
   
-      -- ==========================
       -- Keymaps LSP 
-      -- ==========================
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(ev)
           local opts = { buffer = ev.buf }
@@ -221,8 +217,9 @@ return {
   
     end,
   },
+  -- FIN DE LSP --
 
-  -- 7. Telescope
+  -- TELESCOPE --
   {
     'nvim-telescope/telescope.nvim',
     tag = '0.1.8',
@@ -244,15 +241,6 @@ return {
         require('telescope').load_extension('fzf')
     end
   },
-
-  -- 8. LE4N
-  {
-    'Julian/lean.nvim',
-    event = { 'BufReadPre *.lean', 'BufNewFile *.lean' },
-
-    opts = { 
-      mappings = true,
-    }
-  },
+  -- FIN DE TELESCOPE --
 
 }

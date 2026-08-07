@@ -2,22 +2,22 @@
 local opt = vim.opt
 
 -- Líneas y números
-opt.relativenumber = true -- Números relativos
-opt.number = true         -- Muestra el número de la línea actual
+opt.relativenumber = true 
+opt.number = true         
 
 -- Tabulaciones 
-opt.tabstop = 4           -- Tamaño visual del tab
-opt.shiftwidth = 4        -- Tamaño de la indentación
-opt.expandtab = true      -- Convierte tabs en espacios
+opt.tabstop = 4           
+opt.shiftwidth = 4        
+opt.expandtab = true      
 
 -- Comportamiento
-opt.wrap = false          -- No ajustar líneas largas 
-opt.ignorecase = true     -- Búsqueda insensible a mayúsculas
+opt.wrap = false          
+opt.ignorecase = true     
 opt.smartcase = true      
-opt.cursorline = true     -- Resalta la línea donde estás
-opt.termguicolors = true  -- Colores reales 
-opt.clipboard = "unnamedplus" -- Permite copiar/pegar
+opt.cursorline = true     
+opt.termguicolors = true  
+opt.clipboard = "unnamedplus" 
 
 -- TeX 
-opt.conceallevel = 2 -- Mostrar símbolos
+opt.conceallevel = 2 
 vim.g.tex_conceal = "abdmg"

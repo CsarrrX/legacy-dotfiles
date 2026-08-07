@@ -1,14 +1,14 @@
-# --- Ejecución de servicios y periféricos ---
+# Ejecución de servicios y periféricos 
 exec_always --no-startup-id picom -b
 exec_always --no-startup-id polybar
 exec --no-startup-id feh --bg-fill ~/.config/assets/background3.png
 
-# --- Configuración de Teclado y Touchpad (X11) ---
+# Configuración de Teclado y Touchpad (X11) 
 exec --no-startup-id setxkbmap latam -option caps:swapescape
 exec --no-startup-id xsetwacom --set "Wacom Intuos S Pen stylus" MapToOutput eDP-1
 exec --no-startup-id xsetwacom --set "Wacom Intuos S Pad pad" Button 1 "key +ctrl +z -z -ctrl"
 
-# --- Configuración Visual ---
+# Configuración Visual 
 font pango:JetBrainsMono Nerd Font 11
 default_border pixel 1
 default_floating_border normal
@@ -16,16 +16,18 @@ gaps outer 10
 gaps inner 5
 smart_gaps off
 smart_borders on
-# Hacer que Xournal++ e inkscape sea un pop-up flotante
+
+# Hacer que Xournal++ e inkscape sean un pop-up flotante
 for_window [class="Com.github.xournalpp.xournalpp"] floating enable, resize set 1400 900, move position center
 for_window [instance="org.inkscape.Inkscape"] floating enable, resize set 1400 900, move position center
 
-# --- Variables ---
+# Variables 
 set $mod Mod4 
 set $term kitty
 set $browser firefox
 
-# --- Atajos de Teclado ---
+# ATAJOS DE TECLADO #
+# Aplicaciones
 bindsym $mod+t exec $term
 bindsym $mod+f exec $browser 
 bindsym $mod+Shift+q kill
@@ -105,4 +107,4 @@ bindsym $mod+Shift+p exec systemctl poweroff
 bindsym $mod+Shift+b exec zsh -c "python3 ~/legacy-dotfiles/scripts/rofi_libros.py"
 bindsym $mod+Shift+m exec zsh -c -li "python3 ~/legacy-dotfiles/scripts/rofi_resumenes.py"
 bindsym $mod+Shift+z exec kitty --directory ~/Documentos/Zettelkasten nvim .
-
+# FIN DE ATAJOS DE TECLADO #
