@@ -102,9 +102,4 @@ bindsym $mod+Shift+l exec i3lock -u -i ~/.config/assets/background1.jpg
 
 # Sistema
 bindsym $mod+Shift+p exec systemctl poweroff
-
-# Scripts
-bindsym $mod+Shift+b exec zsh -c "python3 ~/legacy-dotfiles/scripts/rofi_libros.py"
-bindsym $mod+Shift+m exec zsh -c -li "python3 ~/legacy-dotfiles/scripts/rofi_resumenes.py"
-bindsym $mod+Shift+z exec kitty --directory ~/Documentos/Zettelkasten nvim .
 # FIN DE ATAJOS DE TECLADO #
