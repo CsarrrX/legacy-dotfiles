@@ -132,6 +132,7 @@ return {
   s("frak", { t("\\mathfrak{"), i(1), t("}") }),
   s("scr",  { t("\\mathscr{"), i(1), t("}") }),
   s("bb",   { t("\\mathbb{"), i(1), t("}") }),
+  s("txt", { t("\\text{"), i(1), t("}") }),
 
   s("bf",   { t("\\textbf{"), i(1), t("}") }),
   s("it",   { t("\\textit{"), i(1), t("}") }),
@@ -229,9 +230,7 @@ return {
   s("lr[", { t("\\left[ "), i(1), t("\\right]") }),
   s("lr{", { t("\\left\\{ "), i(1), t("\\right\\}") }),
   s("lra", { t("\\left\\langle "), i(1), t("\\right\\rangle") }),
-  s("norm",{ t("\\| "), i(1), t("\\|") }),
   s("abs", { t("\\left| "), i(1), t("\\right|") }),
-  s("txt", { t("\\text{"), i(1), t("}") }),
   s("inf", { t("\\infty") }),
   -- FIN DE GENERALES --
 
