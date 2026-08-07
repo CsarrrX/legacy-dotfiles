@@ -214,7 +214,7 @@ return {
   -- FIN DE ÁLGEBRA
   
   -- OPERADORES -- 
-  s("int",    { t("\\int ") }),
+  s("tint",    { t("\\topint ") }),
   s("sum",    { t("\\sum ") }),
   s("prod",   { t("\\prod ") }),
   s("lim",    { t("\\lim ") }),
