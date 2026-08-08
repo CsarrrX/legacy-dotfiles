@@ -15,5 +15,8 @@ fi
 alias ink='python3 ~/inkscape-shortcut-manager/main.py'
 alias ink2='inkscape-figures watch --no-daemon'
 
+# QR 
+alias qrpdf='qrcp build/master.pdf'
+
 # Inicio de starship
 eval "$(starship init zsh)"
