@@ -15,8 +15,9 @@ fi
 alias ink='python3 ~/inkscape-shortcut-manager/main.py'
 alias ink2='inkscape-figures watch --no-daemon'
 
-# QR 
-alias qrpdf='qrcp build/master.pdf'
+# Telegram 
+alias mandarpdf='telegram-send build/master.pdf'
+alias mandartodas='telegram-send an1/build/master.pdf md3/build/master.pdf mat/build/master.pdf inf1/build/master.pdf'
 
 # Inicio de starship
 eval "$(starship init zsh)"
