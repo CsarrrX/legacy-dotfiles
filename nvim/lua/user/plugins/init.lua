@@ -95,7 +95,7 @@ return {
             end
           end, { "i", "s" }),
 
-          ["C-p"] = cmp.mapping(function(fallback)
+          ["<C-p>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_prev_item()
             elseif ls.jumpable(-1) then
