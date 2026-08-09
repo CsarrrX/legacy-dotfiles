@@ -189,7 +189,7 @@ return {
   -- FIN DE TOPOLOGÍA 
 
   -- TEORÍA DE CATEGORÍAS 
-  s("hom", { t("\\Hom_{"), i(1), t("}("), i(2), t(", "), i(3), t(")") }),
+  s("hom", { t("\\Hom"), i(1), t("}("), i(2), t(", "), i(3), t(")") }),
   s("obj", { t("\\Ob("), i(1), t(")") }),
   s("func", { i(1), t(" : \\mathcal{"), i(2), t("} \\to \\mathcal{"), i(3), t("}") }),
 
