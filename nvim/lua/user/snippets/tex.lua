@@ -234,6 +234,45 @@ return {
   s("inf", { t("\\infty") }),
   -- FIN DE GENERALES --
 
+  -- MATEMÁTICAS ACTUARIALES (SEGURO DE VIDA) --
+  
+  -- 1. Probabilidades y Mortalidad
+  s("lx", { t("l_{"), i(1, "x"), t("}") }),
+  s("dx", { t("d_{"), i(1, "x"), t("}") }),
+  s("px", { t("_{"), i(1, "t"), t("}p_{"), i(2, "x"), t("}") }),
+  s("qx", { t("_{"), i(1, "t"), t("}q_{"), i(2, "x"), t("}") }),
+  s("ex", { t("e_{"), i(1, "x"), t("}") }),
+  s("excirc", { t("\\mathring{e}_{"), i(1, "x"), t("}") }), -- Esperanza de vida completa
+  s("mux", { t("\\mu_{"), i(1, "x"), t("}") }),
+  
+  -- 2. Seguros de Vida
+  s("Ax", { t("A_{"), i(1, "x"), t("}") }),
+  s("Axn", { t("A_{"), i(1, "x"), t(":\\overline{"), i(2, "n"), t("|}") }), -- Seguro dotal
+  s("Axterm", { t("A^1_{"), i(1, "x"), t(":\\overline{"), i(2, "n"), t("|}") }), -- Seguro temporal
+  s("Axpure", { t("A_{"), i(1, "x"), t(":\\overline{"), i(2, "n"), t("|^1}") }), -- Dotal puro (alternativo)
+  s("Ex", { t("_{"), i(1, "n"), t("}E_{"), i(2, "x"), t("}") }), -- Dotal puro (notación E)
+  
+  -- 3. Anualidades
+  s("anx", { t("a_{"), i(1, "x"), t("}") }), -- Vencida
+  s("aadx", { t("\\ddot{a}_{"), i(1, "x"), t("}") }), -- Anticipada
+  s("anxn", { t("a_{"), i(1, "x"), t(":\\overline{"), i(2, "n"), t("|}") }), -- Vencida temporal
+  s("aadxn", { t("\\ddot{a}_{"), i(1, "x"), t(":\\overline{"), i(2, "n"), t("|}") }), -- Anticipada temporal
+  
+  -- 4. Primas y Reservas
+  s("Px", { t("P_{"), i(1, "x"), t("}") }),
+  s("Pxn", { t("P_{"), i(1, "x"), t(":\\overline{"), i(2, "n"), t("|}") }),
+  s("Vx", { t("_{"), i(1, "t"), t("}V_{"), i(2, "x"), t("}") }),
+  
+  -- 5. Valores de Conmutación
+  s("Dx", { t("D_{"), i(1, "x"), t("}") }),
+  s("Nx", { t("N_{"), i(1, "x"), t("}") }),
+  s("Sx", { t("S_{"), i(1, "x"), t("}") }),
+  s("Cx", { t("C_{"), i(1, "x"), t("}") }),
+  s("Mx", { t("M_{"), i(1, "x"), t("}") }),
+  s("Rx", { t("R_{"), i(1, "x"), t("}") }),
+  
+  -- FIN DE MATEMÁTICAS ACTUARIALES --
+
 
   -- PRESETS RÁPIDAS
   s("pset", {
