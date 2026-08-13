@@ -178,7 +178,7 @@ return {
   s("ball", { t("B_{"), i(1), t("}("), i(2), t(")") }),
   s("cball", { t("\\overline{B}_{"), i(1), t("}("), i(2), t(")") }),
   s("inp", { t("\\langle "), i(1), t(", "), i(2), t(" \\rangle") }),
-  s("norm", { t("\\|"), i(1), t("\\|_{"), i(2), t("}") }),
+  s("norm", { t("\\|"), i(1), t("\\|") }),
   -- FIN DE ESPACIOS MÉTRICOS, NORMAS Y PRODUCTOS INTERNOS --
   
   -- TOPOLOGÍA 
