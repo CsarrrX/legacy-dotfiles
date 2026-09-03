@@ -235,6 +235,8 @@ return {
   s("ind", { t("\\mathbbm{1}_{"), i(1), t("}("), i(2), t(")")}),
   s("ln",  { t("\\ln"), i(1)}),
   s("exp", { t("\\exp"), i(1)}),
+  s("ddx",  { t("\\frac{d}{d"), i(1), t("}") }),
+  s("part",  { t("\\frac{\\partial}{\\partial"), i(1), t("}") }),
   -- FIN DE GENERALES --
 
   -- MATEMÁTICAS ACTUARIALES --
