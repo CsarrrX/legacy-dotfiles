@@ -44,7 +44,6 @@ return {
         R_args = {"--quiet", "--no-save"},
         hook = {
           on_filetype = function()
-            -- Keymaps útiles: Enviar línea o selección a R con Enter
             vim.api.nvim_buf_set_keymap(0, "n", "<Enter>", "<Plug>RDSendLine", {})
             vim.api.nvim_buf_set_keymap(0, "v", "<Enter>", "<Plug>RSendSelection", {})
           end
@@ -260,9 +259,7 @@ return {
           local opts = { buffer = ev.buf }
           vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
           vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-          vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
           vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-          vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
           vim.keymap.set("n", "gl", vim.diagnostic.open_float, opts)
         end,
       })
