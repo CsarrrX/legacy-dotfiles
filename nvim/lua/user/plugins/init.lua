@@ -1,4 +1,18 @@
 return {
+  -- TREESITTER --
+  {
+    "nvim-treesitter/nvim-treesitter",
+    branch = "master", 
+    build = ":TSUpdate",
+    config = function()
+      require("nvim-treesitter.configs").setup({
+        ensure_installed = { "r", "rnoweb", "c", "lua", "vim", "vimdoc" },
+        highlight = { enable = true },
+      })
+    end,
+  },
+  -- FIN DE TREESITTER --
+  
   -- ESTÉTICA --
   {
     "folke/tokyonight.nvim",
@@ -12,6 +26,7 @@ return {
   {
     "lervag/vimtex",
     lazy = false,
+    tag = "v2.15",
     init = function()
       vim.g.vimtex_view_method = "zathura"
       vim.keymap.set('n', '<leader>ll', '<cmd>VimtexView<CR>', { desc = 'Ver PDF en Zathura' })
@@ -19,6 +34,27 @@ return {
     end,
   },
   -- FIN DE VIMTEX --
+
+  -- R.NVIM --
+  {
+    "R-nvim/R.nvim",
+    lazy = false,
+    config = function()
+      local opts = {
+        R_args = {"--quiet", "--no-save"},
+        hook = {
+          on_filetype = function()
+            -- Keymaps útiles: Enviar línea o selección a R con Enter
+            vim.api.nvim_buf_set_keymap(0, "n", "<Enter>", "<Plug>RDSendLine", {})
+            vim.api.nvim_buf_set_keymap(0, "v", "<Enter>", "<Plug>RSendSelection", {})
+          end
+        },
+        pdfviewer = "zathura",
+      }
+      require("r").setup(opts)
+    end,
+  },
+  -- FIN DE R.NVIM --
 
   -- LUASNIP --
   {
@@ -202,6 +238,21 @@ return {
           })
         end,
       })
+
+      -- R
+      vim.lsp.config.r_language_server = {
+        cmd = { "R", "--slave", "-e", "languageserver::run()" },
+        root_markers = { ".git", ".Rproj" },
+      }
+
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "r", "rmd" },
+        callback = function(ev)
+          vim.lsp.start(vim.lsp.config.r_language_server, {
+            bufnr = ev.buf,
+          })
+        end,
+      })
   
       -- Keymaps LSP 
       vim.api.nvim_create_autocmd("LspAttach", {
@@ -212,6 +263,7 @@ return {
           vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
           vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
           vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+          vim.keymap.set("n", "gl", vim.diagnostic.open_float, opts)
         end,
       })
   
@@ -233,8 +285,6 @@ return {
         -- Definición de Keymaps
         vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
         vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
-        vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
-        vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
 
         -- Configuración de Telescope
         require('telescope').setup({})

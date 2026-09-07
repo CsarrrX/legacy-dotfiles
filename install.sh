@@ -12,6 +12,7 @@ sudo dnf install -y \
     R-devel kitty libwacom xsetwacom xinput \
     util-linux-user inkscape xournalpp \
     i3 i3lock polybar rofi feh picom maim xclip xdotool \
+    ripgrep fd-find -y
     -y
 
 # --- Herramientas de Lenguaje y LSP ---
@@ -19,6 +20,7 @@ echo "[*] Instalando herramientas globales (NPM/Cargo)..."
 sudo npm install -g pyright
 cargo install texlab
 cargo install starship
+sudo Rscript -e 'install.packages("languageserver", repos="https://cloud.r-project.org/")'
 
 # --- Git config global ---
 echo "[*] Configurando Git..."
@@ -49,6 +51,16 @@ if [ ! -d "$HOME/.local/share/fonts/JetBrainsMono" ]; then
     tar -xvf JetBrainsMono.tar.xz -C ~/.local/share/fonts
     rm JetBrainsMono.tar.xz
     fc-cache -fv
+fi
+
+# --- Nvim ---
+if [ ! -d "/opt/nvim-linux-x86_64" ]; then
+    echo "[*] Instalando Neovim (Estable)..."
+    curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.tar.gz
+    sudo tar -C /opt -xzf nvim-linux-x86_64.tar.gz
+    rm nvim-linux-x86_64.tar.gz
+    # Crear symlink para usar el comando 'nvim' desde cualquier lado
+    sudo ln -sf /opt/nvim-linux-x86_64/bin/nvim /usr/local/bin/nvim
 fi
 
 # --- Estructura de Dotfiles y Symlinks ---
