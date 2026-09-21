@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+TODO_FILE="$HOME/.todo.tex"
+CACHE_DIR="$HOME/.cache/kitty-todo-latex"
+mkdir -p "$CACHE_DIR"
+
+if [ ! -f "$TODO_FILE" ]; then
+    echo '\task Mi primera tarea: $\int_0^1 x^2 dx$' > "$TODO_FILE"
+fi
+
+echo -e "\033[1;36m󰄲 LISTA DE TAREAS PENDIENTES\033[0m\n"
+
+id=1
+grep -E '^\s*\\task\s+' "$TODO_FILE" | while read -r line; do
+    task_content=$(echo "$line" | sed 's/^\s*\\task\s*//')
+    hash=$(echo -n "$task_content" | md5sum | awk '{print $1}')
+    img_path="$CACHE_DIR/$hash.png"
+
+    if [ ! -f "$img_path" ]; then
+        tex_file="$CACHE_DIR/$hash.tex"
+        cat <<EOF > "$tex_file"
+\documentclass[preview,border=2pt]{standalone}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{xcolor}
+\pagecolor{white}
+\begin{document}
+\color{black}
+$task_content
+\end{document}
+EOF
+        pdflatex -output-directory="$CACHE_DIR" "$tex_file" >/dev/null 2>&1
+        pdftoppm -png -r 150 "$CACHE_DIR/$hash.pdf" "$CACHE_DIR/$hash-tmp" >/dev/null 2>&1
+        mv "$CACHE_DIR/$hash-tmp-1.png" "$img_path" 2>/dev/null
+    fi
+
+    echo -n -e " \033[33m$id.\033[0m 󰄱 "
+    if [ -f "$img_path" ]; then
+        kitty +kitten icat --align left "$img_path"
+    else
+        echo -e "$task_content"
+    fi
+    ((id++))
+done
+echo ""

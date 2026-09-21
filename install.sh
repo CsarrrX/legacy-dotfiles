@@ -8,12 +8,11 @@ echo "[*] Instalando paquetes del sistema y herramientas de compilación..."
 sudo dnf install -y \
     git curl wget gcc make cmake zsh firefox nodejs \
     python3 python3-pip clang-tools-extra cargo rust \
-    texlive-scheme-full latexmk zathura zathura-pdf-mupdf \
+    texlive-scheme-full latexmk zathura zathura-pdf-mupdf poppler-utils \
     R-devel kitty libwacom xsetwacom xinput \
     util-linux-user inkscape xournalpp \
     i3 i3lock polybar rofi feh picom maim xclip xdotool \
-    ripgrep fd-find -y
-    -y
+    ripgrep fd-find jq
 
 # --- Herramientas de Lenguaje y LSP ---
 echo "[*] Instalando herramientas globales (NPM/Cargo)..."
@@ -64,8 +63,19 @@ if [ ! -d "/opt/nvim-linux-x86_64" ]; then
 fi
 
 # --- Estructura de Dotfiles y Symlinks ---
-echo "[*] Creando symlinks de dotfiles..."
-mkdir -p ~/.config/i3 ~/.config/polybar ~/.config/rofi ~/.config/kitty ~/.config/picom ~/.config/fastfetch
+echo "[*] Creando symlinks de dotfiles y preparando scripts..."
+mkdir -p ~/.config/i3 ~/.config/polybar ~/.config/rofi ~/.config/kitty ~/.config/picom ~/.config/fastfetch ~/.local/bin
+
+# Otorgar permisos de ejecución a todos tus scripts locales
+if [ -d "$HOME/legacy-dotfiles/scripts" ]; then
+    chmod +x ~/legacy-dotfiles/scripts/*
+    # Crear symlink a ~/.local/bin para que queden disponibles en tu $PATH
+    for script in ~/legacy-dotfiles/scripts/*; do
+        if [ -f "$script" ]; then
+            ln -sf "$script" ~/.local/bin/"$(basename "$script")"
+        fi
+    done
+fi
 
 ln -sf ~/legacy-dotfiles/i3/config ~/.config/i3/config
 ln -sf ~/legacy-dotfiles/fastfetch/config.jsonc ~/.config/fastfetch/config.jsonc

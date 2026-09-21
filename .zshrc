@@ -32,3 +32,9 @@ mandartodas() {
 
 # Inicio de starship
 eval "$(starship init zsh)"
+
+# To-do
+alias te='nvim ~/.todo.tex'
+if [ "$TERM" = "xterm-kitty" ]; then
+    todo-kitty
+fi
