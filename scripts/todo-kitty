@@ -31,6 +31,7 @@ while read -u 3 -r line; do
             echo '\usepackage[utf8]{inputenc}' >> "$tex_file"
             echo '\usepackage{amsmath,amsfonts,mathtools,amsthm,amssymb,mathrsfs,stmaryrd,bm,bbm}' >> "$tex_file"
             echo '\usepackage{xcolor}' >> "$tex_file"
+            echo '\usepackage{cmbright}' >> "$tex_file"
             echo '\renewcommand{\implies}{\Rightarrow}' >> "$tex_file"
             echo '\renewcommand{\impliedby}{\Leftarrow}' >> "$tex_file"
             echo '\renewcommand{\iff}{\Leftrightarrow}' >> "$tex_file"
