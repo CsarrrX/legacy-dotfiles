@@ -150,6 +150,7 @@ return {
   -- FIN DE LÓGICA
 
   -- TEORÍA DE CONJUNTOS -- 
+  s("emp",  { t("\\emptyset") }),
   s("set",   { t("\\{"), i(1), t("\\}") }),
   s("in",    { t("\\in") }),
   s("notin", { t("\\notin") }),
