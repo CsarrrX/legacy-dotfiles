@@ -7,6 +7,9 @@ export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 # Configuración de Miniconda
 export PATH="$HOME/miniconda3/bin:$PATH"
 
+# Local PATH
+export PATH="$HOME/.local/bin:$PATH"
+
 if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
     . "$HOME/miniconda3/etc/profile.d/conda.sh"
 fi
@@ -35,6 +38,6 @@ eval "$(starship init zsh)"
 
 # To-do
 alias te='nvim ~/.todo.tex'
-if [ "$TERM" = "xterm-kitty" ]; then
-    todo-kitty
-fi
+alias td='~/legacy-dotfiles/scripts/todo-kitty'
+
+todo-kitty

@@ -5,40 +5,57 @@ CACHE_DIR="$HOME/.cache/kitty-todo-latex"
 mkdir -p "$CACHE_DIR"
 
 if [ ! -f "$TODO_FILE" ]; then
-    echo '\task Mi primera tarea: $\int_0^1 x^2 dx$' > "$TODO_FILE"
+    cat <<EOF > "$TODO_FILE"
+\task Resolver la ecuación de onda: $\nabla^2 \psi = \frac{1}{v^2} \frac{\partial^2 \psi}{\partial t^2}$
+\task Revisar los apuntes de la integral: $\int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2}$
+\task Tarea normal sin LaTeX
+EOF
 fi
 
 echo -e "\033[1;36m󰄲 LISTA DE TAREAS PENDIENTES\033[0m\n"
 
 id=1
-grep -E '^\s*\\task\s+' "$TODO_FILE" | while read -r line; do
+
+while read -u 3 -r line; do
     task_content=$(echo "$line" | sed 's/^\s*\\task\s*//')
+    
     hash=$(echo -n "$task_content" | md5sum | awk '{print $1}')
     img_path="$CACHE_DIR/$hash.png"
 
-    if [ ! -f "$img_path" ]; then
-        tex_file="$CACHE_DIR/$hash.tex"
-        cat <<EOF > "$tex_file"
-\documentclass[preview,border=2pt]{standalone}
-\usepackage{amsmath,amssymb,amsfonts}
-\usepackage{xcolor}
-\pagecolor{white}
-\begin{document}
-\color{black}
-$task_content
-\end{document}
-EOF
-        pdflatex -output-directory="$CACHE_DIR" "$tex_file" >/dev/null 2>&1
-        pdftoppm -png -r 150 "$CACHE_DIR/$hash.pdf" "$CACHE_DIR/$hash-tmp" >/dev/null 2>&1
-        mv "$CACHE_DIR/$hash-tmp-1.png" "$img_path" 2>/dev/null
+    if [[ "$task_content" =~ \$.*\$ ]]; then
+        if [ ! -f "$img_path" ]; then
+            tex_file="$CACHE_DIR/$hash.tex"
+            
+            # Escribimos el LaTeX con comillas simples ('') para evitar que Bash borre las diagonales invertidas (\)
+            echo '\documentclass[preview,border=2pt]{standalone}' > "$tex_file"
+            echo '\usepackage{amsmath,amssymb,amsfonts}' >> "$tex_file"
+            echo '\usepackage{xcolor}' >> "$tex_file"
+            echo '\begin{document}' >> "$tex_file"
+            echo '\color{white}' >> "$tex_file"
+            echo "$task_content" >> "$tex_file"
+            echo '\end{document}' >> "$tex_file"
+
+            # Compilamos el PDF
+            pdflatex -interaction=nonstopmode -output-directory="$CACHE_DIR" "$tex_file" >/dev/null 2>&1
+            
+            # Usamos pdftocairo: genera transparencia perfecta y evita el fallo de ImageMagick
+            pdftocairo -png -transp -singlefile "$CACHE_DIR/$hash.pdf" "$CACHE_DIR/$hash" >/dev/null 2>&1
+            
+            rm -f "$CACHE_DIR/$hash.aux" "$CACHE_DIR/$hash.log" "$CACHE_DIR/$hash.pdf" "$CACHE_DIR/$hash.tex"
+        fi
+
+        echo -n -e " \033[33m$id.\033[0m 󰄱 "
+        # Verificamos con -s que la imagen exista Y no pese 0 bytes antes de enviarla a Kitty
+        if [ -s "$img_path" ]; then
+            kitty +kitten icat --align left --transfer-mode=file "$img_path" </dev/null
+        else
+            echo -e "$task_content \033[31m(Error compilando LaTeX)\033[0m"
+        fi
+    else
+        echo -e " \033[33m$id.\033[0m 󰄱 $task_content"
     fi
 
-    echo -n -e " \033[33m$id.\033[0m 󰄱 "
-    if [ -f "$img_path" ]; then
-        kitty +kitten icat --align left "$img_path"
-    else
-        echo -e "$task_content"
-    fi
     ((id++))
-done
+done 3< <(grep -E '^\s*\\task\s+' "$TODO_FILE")
+
 echo ""
