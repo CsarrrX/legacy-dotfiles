@@ -7,17 +7,27 @@ mkdir -p "$CACHE_DIR"
 if [ ! -f "$TODO_FILE" ]; then
     cat <<EOF > "$TODO_FILE"
 \task Resolver la ecuación de onda: $\nabla^2 \psi = \frac{1}{v^2} \frac{\partial^2 \psi}{\partial t^2}$
-\task Revisar los apuntes de la integral: $\int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2}$
+\done Revisar los apuntes de la integral: $\int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2}$
 \task Tarea normal sin LaTeX
 EOF
 fi
 
-echo -e "\033[1;36m󰄲 LISTA DE TAREAS PENDIENTES\033[0m\n"
+echo -e "\033[1;34mTAREAS PENDIENTES\033[0m\n"
 
 id=1
 
 while read -u 3 -r line; do
-    task_content=$(echo "$line" | sed 's/^\s*\\task\s*//')
+    if [[ "$line" =~ ^\s*\\done ]]; then
+        box="[x]"
+        strike_start="\033[9m"  
+        strike_end="\033[0m"
+    else
+        box="[ ]"
+        strike_start=""
+        strike_end=""
+    fi
+
+    task_content=$(echo "$line" | sed -E 's/^\s*\\(task|done)\s*//')
     
     hash=$(echo -n "$task_content" | md5sum | awk '{print $1}')
     img_path="$CACHE_DIR/$hash.png"
@@ -26,7 +36,6 @@ while read -u 3 -r line; do
         if [ ! -f "$img_path" ]; then
             tex_file="$CACHE_DIR/$hash.tex"
             
-            # Escribimos el LaTeX protegiendo los caracteres especiales
             echo '\documentclass[preview,border=2pt]{standalone}' > "$tex_file"
             echo '\usepackage[utf8]{inputenc}' >> "$tex_file"
             echo '\usepackage{amsmath,amsfonts,mathtools,amsthm,amssymb,mathrsfs,stmaryrd,bm,bbm}' >> "$tex_file"
@@ -40,28 +49,23 @@ while read -u 3 -r line; do
             echo "$task_content" >> "$tex_file"
             echo '\end{document}' >> "$tex_file"
 
-            # Compilamos el PDF y lo convertimos a PNG con transparencia
             pdflatex -interaction=nonstopmode -output-directory="$CACHE_DIR" "$tex_file" >/dev/null 2>&1
             pdftocairo -png -transp -singlefile "$CACHE_DIR/$hash.pdf" "$CACHE_DIR/$hash" >/dev/null 2>&1
             
             rm -f "$CACHE_DIR/$hash.aux" "$CACHE_DIR/$hash.log" "$CACHE_DIR/$hash.pdf" "$CACHE_DIR/$hash.tex"
         fi
 
-        # Si la imagen se generó correctamente
         if [ -s "$img_path" ]; then
-            # 1. Imprimimos el número y el checkbox (con un salto de línea al final)
-            echo -e " \033[33m$id.\033[0m 󰄱"
-            # 2. Renderizamos la imagen debajo. '< /dev/tty' repara el error de ImageMagick y '/dev/shm'
+            echo -e " \033[34m$id.\033[0m $box"
             kitty +kitten icat --align left --transfer-mode=file "$img_path" < /dev/tty
         else
-            echo -e " \033[33m$id.\033[0m 󰄱 $task_content \033[31m(Error compilando LaTeX)\033[0m"
+            echo -e " \033[34m$id.\033[0m $box ${strike_start}$task_content${strike_end} \033[31m(Error compilando LaTeX)\033[0m"
         fi
     else
-        # Tarea estándar (sin LaTeX) en una sola línea
-        echo -e " \033[33m$id.\033[0m 󰄱 $task_content"
+        echo -e " \033[34m$id.\033[0m $box ${strike_start}$task_content${strike_end}"
     fi
 
     ((id++))
-done 3< <(grep -E '^\s*\\task\s+' "$TODO_FILE")
+done 3< <(grep -E '^\s*\\(task|done)\s+' "$TODO_FILE")
 
 echo ""
