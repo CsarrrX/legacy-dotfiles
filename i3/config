@@ -90,7 +90,7 @@ bindsym $mod+Mod1+j move down
 bindsym $mod+Mod1+k move up
 
 # Captura de pantalla
-bindsym $mod+s exec --no-startup-id sh -c 'maim -s | tee ~/Pictures/$(date +%Y%m%d_%H%M%S).png | xclip -selection clipboard -t image/png'
+bindsym $mod+s exec --no-startup-id sh -c 'maim -s | tee ~/Imagenes/$(date +%Y%m%d_%H%M%S).png | xclip -selection clipboard -t image/png'
 
 # Gestión de sesión
 bindsym $mod+Shift+c reload
