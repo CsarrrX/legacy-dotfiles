@@ -40,7 +40,7 @@ keymap("n", "<C-p>", function()
   local file = vim.fn.expand("%")
   local out = vim.fn.expand("%:r")
 
-  -- Generar input.txt y output.txt si no existen en el directorio actual
+  -- Generar input/output si no existen para evitar que 'freopen' lance un error de lectura
   if vim.fn.filereadable("input.txt") == 0 then
     vim.fn.writefile({}, "input.txt")
   end
@@ -48,18 +48,16 @@ keymap("n", "<C-p>", function()
     vim.fn.writefile({}, "output.txt")
   end
 
-  -- Comando de compilación sin comillas simples internas
+  -- Ejecución limpia: tu código ya hace el freopen, así que solo lo corremos y leemos el output
   local exec_cmd = string.format(
-    "g++ -O3 -std=c++20 -Wall %s -o %s && ./%s; echo; echo --- Presiona ENTER para salir ---; read",
+    "g++ -O3 -std=c++20 -Wall %s -o %s && ./%s; echo '--- Resultado ---'; cat output.txt; echo; echo '--- Presiona ENTER para salir ---'; read",
     file, out, out
   )
 
-  -- Comando para i3wm separado por punto y coma (;)
-  local i3_cmd = string.format(
-    "i3-msg 'split h; exec %s sh -c \"%s\"'",
-    TERMINAL, exec_cmd
-  )
+  -- 1. Prepara la división horizontal en i3wm
+  vim.fn.system("i3-msg split h")
 
-  vim.fn.jobstart(i3_cmd)
-end, { silent = true, desc = "Compilar y ejecutar C++ en i3wm" })
+  -- 2. Abre la terminal de forma nativa en Neovim
+  vim.fn.jobstart({ TERMINAL, "-e", "sh", "-c", exec_cmd })
+end, { silent = true, desc = "Compilar C++ Competitivo en i3wm" })
 -- FIN DE COMPILACIÓN EN C++ --
