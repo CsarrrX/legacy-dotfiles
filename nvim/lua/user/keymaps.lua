@@ -34,7 +34,7 @@ end, { silent = true, desc = "Editar figura con Inkscape en segundo plano" })
 -- COMPILACIÓN EN C++ --
 local TERMINAL = os.getenv("TERMINAL") or "kitty"
 
-keymap("n", "<F5>", function() vim.cmd("w") -- Guardar el archivo .cpp actual
+keymap("n", "cp", function() vim.cmd("w") -- Guardar el archivo .cpp actual
 
   local file = vim.fn.expand("%")
   local out = vim.fn.expand("%:r")
