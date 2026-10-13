@@ -34,7 +34,8 @@ end, { silent = true, desc = "Editar figura con Inkscape en segundo plano" })
 -- COMPILACIÓN EN C++ --
 local TERMINAL = os.getenv("TERMINAL") or "kitty"
 
-keymap("n", "<C-p>", function() vim.cmd("w") -- Guardar el archivo .cpp actual
+keymap("n", "<C-p>", function()
+  vim.cmd("w") -- Guardar el archivo .cpp actual
 
   local file = vim.fn.expand("%")
   local out = vim.fn.expand("%:r")
@@ -47,15 +48,15 @@ keymap("n", "<C-p>", function() vim.cmd("w") -- Guardar el archivo .cpp actual
     vim.fn.writefile({}, "output.txt")
   end
 
-  -- Comando de compilación C++20 con O3 y ejecución
+  -- Comando de compilación sin comillas simples internas
   local exec_cmd = string.format(
-    "g++ -O3 -std=c++20 -Wall %s -o %s && ./%s; echo ''; echo '--- Presiona ENTER para salir ---'; read",
+    "g++ -O3 -std=c++20 -Wall %s -o %s && ./%s; echo; echo --- Presiona ENTER para salir ---; read",
     file, out, out
   )
 
-  -- Manda la orden a i3wm para dividir horizontalmente y abrir el terminal
+  -- Comando para i3wm separado por punto y coma (;)
   local i3_cmd = string.format(
-    "i3-msg 'split h, exec %s -e sh -c \"%s\"'",
+    "i3-msg 'split h; exec %s sh -c \"%s\"'",
     TERMINAL, exec_cmd
   )
 
