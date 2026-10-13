@@ -3,29 +3,46 @@ local s = ls.snippet
 local t = ls.text_node
 local i = ls.insert_node
 
-ls.add_snippets("cpp", {
+return {
   s("cp", {
     t({
       "#include <bits/stdc++.h>",
       "using namespace std;",
       "",
+      "// Optimizaciones de compilador para Codeforces",
       "#pragma GCC optimize(\"O3,unroll-loops\")",
       "#pragma GCC target(\"avx2,bmi,bmi2,lzcnt,popcnt\")",
       "",
+      "// Aliases de tipos y macros",
       "using ll = long long;",
+      "using ld = long double;",
       "using pii = pair<int, int>;",
+      "using pll = pair<ll, ll>;",
       "using vi = vector<int>;",
+      "using vll = vector<ll>;",
+      "",
+      "#define pb push_back",
+      "#define all(x) (x).begin(), (x).end()",
+      "#define sz(x) (int)(x).size()",
       "#define nl '\\n'",
+      "",
+      "// Debugging local (no se ejecuta en el juez)",
+      "#ifndef ONLINE_JUDGE",
+      "#define dbg(x) cerr << \"[DEBUG] \" << #x << \" = \" << (x) << endl",
+      "#else",
+      "#define dbg(x)",
+      "#endif",
       "",
       "void solve() {",
       "    ",
     }),
-    i(1, "// escribe la solución aquí"),
+    i(1, "// Escribe tu solución aquí"),
     t({
       "",
       "}",
       "",
       "int main() {",
+      "    // Fast I/O",
       "    ios_base::sync_with_stdio(false);",
       "    cin.tie(NULL);",
       "",
@@ -35,7 +52,7 @@ ls.add_snippets("cpp", {
       "#endif",
       "",
       "    int t = 1;",
-      "    cin >> t;",
+      "    cin >> t; // Descomenta si el problema NO tiene múltiples testcases",
       "    while (t--) {",
       "        solve();",
       "    }",
@@ -43,4 +60,4 @@ ls.add_snippets("cpp", {
       "}",
     }),
   }),
-})
+}
