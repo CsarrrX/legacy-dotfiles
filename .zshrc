@@ -23,6 +23,10 @@ eval "$(starship init zsh)"
 
 # To-do
 alias te='nvim ~/.todo.tex'
-alias td='~/legacy-dotfiles/scripts/to-do'
+alias tt='~/legacy-dotfiles/scripts/to-do'
+
+# Calendario
+alias ce='nvim ~/.cal_local.tex'
+alias ct='~/legacy-dotfiles/scripts/cal.sh'
 
 to-do

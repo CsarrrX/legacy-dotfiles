@@ -1,0 +1,158 @@
+#!/usr/bin/env bash
+
+BB_ICS_URL="https://click.udlap.mx/webapps/calendar/calendarFeed/fe537b7a9f8b4756bf1753bd2413162a/learn.ics"
+LOCAL_FILE="$HOME/.cal_local.tex"
+CACHE_DIR="$HOME/.cache/cal-latex"
+ICS_CACHE="$CACHE_DIR/bb_cache.ics"
+
+mkdir -p "$CACHE_DIR"
+
+if [ ! -f "$ICS_CACHE" ] || [ "$(( $(date +%s) - $(stat -c %Y "$ICS_CACHE" 2>/dev/null || stat -f %m "$ICS_CACHE") ))" -gt 3600 ]; then
+    [[ "$BB_ICS_URL" =~ ^https?:// ]] && curl -s -L "$BB_ICS_URL" -o "$ICS_CACHE" 2>/dev/null
+fi
+
+if [ ! -f "$LOCAL_FILE" ]; then
+    cat <<'EOF' > "$LOCAL_FILE"
+\weekly{1}{08:00}{Clase de Actuaría: Modelos de Supervivencia $S(t) = e^{-\int_0^t \mu(x) dx}$}
+\weekly{3}{10:00}{Laboratorio de programación}
+\event{2026-10-17}{16:00}{Examen parcial: $\int e^x dx$}
+EOF
+fi
+
+TODAY=$(date +'%Y-%m-%d')
+CUR_YEAR=$(date +'%Y')
+CUR_MONTH=$(date +'%m')
+CUR_DAY_NUM=$(date +'%d')
+
+first_dow=$(date -d "$CUR_YEAR-$CUR_MONTH-01" +%u 2>/dev/null || date -jf "%Y-%m-%d" "$CUR_YEAR-$CUR_MONTH-01" +%u)
+days_in_month=$(date -d "$CUR_YEAR-$CUR_MONTH-01 + 1 month - 1 day" +%d 2>/dev/null || date -v1d -v+1m -v-1d +"%d")
+
+EVENTS_TMP=$(mktemp)
+trap 'rm -f "$EVENTS_TMP"' EXIT
+
+if [ -f "$ICS_CACHE" ]; then
+    awk '
+    /^BEGIN:VEVENT/ { in_ev = 1; dt = ""; sum = "" }
+    /^DTSTART/      { sub(/.*:/, ""); dt = $0 }
+    /^SUMMARY/      { sub(/^SUMMARY:/, ""); sum = $0 }
+    /^END:VEVENT/   {
+        if (dt != "" && sum != "") {
+            gsub(/\r/, "", dt); gsub(/\r/, "", sum);
+            print dt "\t" sum;
+        }
+        in_ev = 0;
+    }
+    ' "$ICS_CACHE" | while IFS=$'\t' read -r raw_dt summary; do
+        year="${raw_dt:0:4}"
+        month="${raw_dt:4:2}"
+        day="${raw_dt:6:2}"
+        hour="${raw_dt:9:2}"
+        min="${raw_dt:11:2}"
+        
+        if [[ "$raw_dt" == *Z* ]]; then
+            utc_str="$year-$month-$day $hour:$min:00 UTC"
+            local_date=$(date -d "$utc_str" +'%Y-%m-%d' 2>/dev/null || date -jf "%Y-%m-%d %H:%M:%S %Z" "$utc_str" +"%Y-%m-%d" 2>/dev/null)
+            local_time=$(date -d "$utc_str" +'%H:%M' 2>/dev/null || date -jf "%Y-%m-%d %H:%M:%S %Z" "$utc_str" +"%H:%M" 2>/dev/null)
+        else
+            local_date="$year-$month-$day"
+            local_time="${hour:-00}:${min:-00}"
+        fi
+        [ -n "$local_date" ] && echo "$local_date|$local_time|[BB] $summary" >> "$EVENTS_TMP"
+    done
+fi
+
+while read -r line; do
+    if [[ "$line" =~ ^\\event\{([0-9]{4}-[0-9]{2}-[0-9]{2})\}\{([0-9]{2}:[0-9]{2})\}\{(.+)\} ]]; then
+        echo "${BASH_REMATCH[1]}|${BASH_REMATCH[2]}|${BASH_REMATCH[3]}" >> "$EVENTS_TMP"
+    elif [[ "$line" =~ ^\\weekly\{([1-7])\}\{([0-9]{2}:[0-9]{2})\}\{(.+)\} ]]; then
+        w_dow="${BASH_REMATCH[1]}"
+        w_time="${BASH_REMATCH[2]}"
+        w_desc="${BASH_REMATCH[3]}"
+        for ((d=1; d<=days_in_month; d++)); do
+            curr_dow=$(( (first_dow + d - 2) % 7 + 1 ))
+            if [ "$curr_dow" -eq "$w_dow" ]; then
+                printf "%04d-%s-%02d|%s|%s\n" "$CUR_YEAR" "$CUR_MONTH" "$d" "$w_time" "$w_desc" >> "$EVENTS_TMP"
+            fi
+        done
+    fi
+done < <(grep -E '^\s*\\(event|weekly)\{' "$LOCAL_FILE" 2>/dev/null)
+
+declare -A DAY_COUNTS
+while IFS='|' read -r e_date e_time e_desc; do
+    if [[ "$e_date" == "$CUR_YEAR-$CUR_MONTH"* ]]; then
+        d_num=$((10#${e_date:8:2}))
+        DAY_COUNTS[$d_num]=$(( ${DAY_COUNTS[$d_num]:-0} + 1 ))
+    fi
+done < "$EVENTS_TMP"
+
+echo -e "\033[1;36m=== $(date +'%B %Y' | tr '[:lower:]' '[:upper:]') ===\033[0m\n"
+echo -e "\033[1;30m  Lu      Ma      Mi      Ju      Vi      Sa      Do\033[0m"
+
+col=1
+while [ "$col" -lt "$first_dow" ]; do
+    printf "        "
+    ((col++))
+done
+
+for ((day=1; day<=days_in_month; day++)); do
+    count="${DAY_COUNTS[$day]:-0}"
+    [ "$count" -gt 0 ] && badge="\033[33m•$count\033[0m" || badge="  "
+    
+    if [ "$day" -eq "$((10#$CUR_DAY_NUM))" ]; then
+        printf "\033[1;44;37m %02d \033[0m%-3b " "$day" "$badge"
+    else
+        printf " %02d %-3b " "$day" "$badge"
+    fi
+    
+    if [ "$col" -eq 7 ]; then
+        echo ""
+        col=1
+    else
+        ((col++))
+    fi
+done
+[ "$col" -ne 1 ] && echo ""
+echo ""
+
+echo -e "\033[1;34mHORARIO DE HOY ($TODAY)\033[0m\n"
+
+TODAY_EVENTS=$(grep "^$TODAY|" "$EVENTS_TMP" | sort -t'|' -k2)
+
+if [ -z "$TODAY_EVENTS" ]; then
+    echo -e " \033[90m(Sin entregas ni eventos programados)\033[0m\n"
+else
+    while IFS='|' read -r _ time desc; do
+        if [[ "$desc" =~ \$.*\$ ]]; then
+            hash=$(echo -n "$desc" | md5sum | awk '{print $1}')
+            img_path="$CACHE_DIR/$hash.png"
+
+            if [ ! -f "$img_path" ]; then
+                tex_file="$CACHE_DIR/$hash.tex"
+                cat <<TEX > "$tex_file"
+\documentclass[preview,border=2pt]{standalone}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,mathtools,amsthm,amssymb,mathrsfs,stmaryrd,bm,bbm}
+\usepackage{xcolor}
+\usepackage{cmbright}
+\begin{document}
+\color{white}
+$desc
+\end{document}
+TEX
+                pdflatex -interaction=nonstopmode -output-directory="$CACHE_DIR" "$tex_file" >/dev/null 2>&1
+                pdftocairo -png -transp -singlefile "$CACHE_DIR/$hash.pdf" "$CACHE_DIR/$hash" >/dev/null 2>&1
+                rm -f "$CACHE_DIR/$hash.aux" "$CACHE_DIR/$hash.log" "$CACHE_DIR/$hash.pdf" "$CACHE_DIR/$hash.tex"
+            fi
+
+            echo -e " \033[1;32m$time\033[0m"
+            if [ -s "$img_path" ]; then
+                kitty +kitten icat --align left --transfer-mode=file "$img_path" < /dev/tty
+            else
+                echo -e "   $desc \033[31m(Error LaTeX)\033[0m"
+            fi
+        else
+            echo -e " \033[1;32m$time\033[0m  $desc"
+        fi
+    done <<< "$TODAY_EVENTS"
+    echo ""
+fi
