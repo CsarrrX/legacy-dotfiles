@@ -27,7 +27,7 @@ alias tt='~/legacy-dotfiles/scripts/to-do'
 
 # Calendario
 alias ce='nvim ~/.cal_local.tex'
-alias ct='~/legacy-dotfiles/scripts/cal.sh'
+alias ct='~/legacy-dotfiles/scripts/calendar'
 
 to-do
 calendar
