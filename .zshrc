@@ -29,5 +29,8 @@ alias tt='~/legacy-dotfiles/scripts/to-do'
 alias ce='nvim ~/.cal_local.tex'
 alias ct='~/legacy-dotfiles/scripts/calendar'
 
+# Git 
+alias git_all='git add . && git commit -m "changes" && git push'
+
 to-do
 calendar
