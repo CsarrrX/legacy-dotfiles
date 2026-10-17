@@ -15,29 +15,14 @@ if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
 fi
 
 # Inkscape
-alias ink='python3 ~/inkscape-shortcut-manager/main.py'
+alias ink1='python3 ~/inkscape-shortcut-manager/main.py'
 alias ink2='inkscape-figures watch --no-daemon'
-
-# Telegram 
-alias mandarpdf='telegram-send --file build/master.pdf'
-mandartodas() {
-    echo "Enviando notas..."
-    for pdf in an2/build/master.pdf md3/build/master.pdf mat/build/master.pdf inf1/build/master.pdf; do
-        if [ -f "$pdf" ]; then
-            telegram-send --file "$pdf"
-            echo "Enviado: $pdf"
-        else
-            echo "No encontrado: $pdf"
-        fi
-    done
-    echo "¡Listo!"
-}
 
 # Inicio de starship
 eval "$(starship init zsh)"
 
 # To-do
 alias te='nvim ~/.todo.tex'
-alias td='~/legacy-dotfiles/scripts/todo-kitty'
+alias td='~/legacy-dotfiles/scripts/to-do'
 
-todo-kitty
+to-do

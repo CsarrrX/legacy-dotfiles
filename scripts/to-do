@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 TODO_FILE="$HOME/.todo.tex"
-CACHE_DIR="$HOME/.cache/kitty-todo-latex"
+CACHE_DIR="$HOME/.cache/to-do-latex"
 mkdir -p "$CACHE_DIR"
 
 if [ ! -f "$TODO_FILE" ]; then
