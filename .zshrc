@@ -23,14 +23,9 @@ eval "$(starship init zsh)"
 
 # To-do
 alias te='nvim ~/.todo.tex'
-alias tt='~/legacy-dotfiles/scripts/to-do'
-
-# Calendario
-alias ce='nvim ~/.cal_local.tex'
-alias ct='~/legacy-dotfiles/scripts/calendar'
+alias td='~/legacy-dotfiles/scripts/to-do'
 
 # Git 
 alias git_all='git add . && git commit -m "changes" && git push'
 
 to-do
-calendar
