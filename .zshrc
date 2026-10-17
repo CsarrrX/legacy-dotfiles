@@ -30,3 +30,4 @@ alias ce='nvim ~/.cal_local.tex'
 alias ct='~/legacy-dotfiles/scripts/cal.sh'
 
 to-do
+calendar

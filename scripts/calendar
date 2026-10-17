@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-BB_ICS_URL="https://click.udlap.mx/webapps/calendar/calendarFeed/fe537b7a9f8b4756bf1753bd2413162a/learn.ics"
+BB_ICS_URL="PEGA_AQUI_TU_ENLACE_ICS_DE_BLACKBOARD"
 LOCAL_FILE="$HOME/.cal_local.tex"
 CACHE_DIR="$HOME/.cache/cal-latex"
 ICS_CACHE="$CACHE_DIR/bb_cache.ics"
@@ -85,24 +85,35 @@ while IFS='|' read -r e_date e_time e_desc; do
     fi
 done < "$EVENTS_TMP"
 
-echo -e "\033[1;36m=== $(date +'%B %Y' | tr '[:lower:]' '[:upper:]') ===\033[0m\n"
-echo -e "\033[1;30m  Lu      Ma      Mi      Ju      Vi      Sa      Do\033[0m"
+# Calendario - Unicamente usando azul oscuro/brillante
+echo -e "\033[1;34m=== $(date +'%B %Y' | tr '[:lower:]' '[:upper:]') ===\033[0m\n"
+echo -e "\033[1;34m  Lu      Ma      Mi      Ju      Vi      Sa      Do\033[0m"
 
 col=1
 while [ "$col" -lt "$first_dow" ]; do
-    printf "        "
+    echo -n "        "
     ((col++))
 done
 
 for ((day=1; day<=days_in_month; day++)); do
     count="${DAY_COUNTS[$day]:-0}"
-    [ "$count" -gt 0 ] && badge="\033[33m•$count\033[0m" || badge="  "
+    
+    # Ajuste milimétrico de espacios para evitar desalineación (exactamente 8 caracteres por bloque)
+    if [ "$count" -gt 0 ]; then
+        badge="\033[1;34m•${count}\033[0m"
+        pad=$([ "$count" -lt 10 ] && echo "  " || echo " ")
+    else
+        badge="  "
+        pad="  "
+    fi
     
     if [ "$day" -eq "$((10#$CUR_DAY_NUM))" ]; then
-        printf "\033[1;44;37m %02d \033[0m%-3b " "$day" "$badge"
+        day_str="\033[44;1;37m $(printf "%02d" "$day") \033[0m"
     else
-        printf " %02d %-3b " "$day" "$badge"
+        day_str=" $(printf "%02d" "$day") "
     fi
+    
+    echo -n -e "${day_str}${badge}${pad}"
     
     if [ "$col" -eq 7 ]; then
         echo ""
@@ -135,7 +146,7 @@ else
 \usepackage{xcolor}
 \usepackage{cmbright}
 \begin{document}
-\color{white}
+\color{white}\Large
 $desc
 \end{document}
 TEX
@@ -144,14 +155,16 @@ TEX
                 rm -f "$CACHE_DIR/$hash.aux" "$CACHE_DIR/$hash.log" "$CACHE_DIR/$hash.pdf" "$CACHE_DIR/$hash.tex"
             fi
 
-            echo -e " \033[1;32m$time\033[0m"
+            echo -e "  \033[1;34m$time\033[0m"
             if [ -s "$img_path" ]; then
+                # Se renderiza la imagen de LaTeX justo debajo de la hora con una indentación natural
                 kitty +kitten icat --align left --transfer-mode=file "$img_path" < /dev/tty
             else
-                echo -e "   $desc \033[31m(Error LaTeX)\033[0m"
+                echo -e "           $desc \033[31m(Error LaTeX)\033[0m"
             fi
         else
-            echo -e " \033[1;32m$time\033[0m  $desc"
+            # Tareas normales formateadas con la hora en azul y texto alineado
+            echo -e "  \033[1;34m$time\033[0m    $desc"
         fi
     done <<< "$TODAY_EVENTS"
     echo ""
