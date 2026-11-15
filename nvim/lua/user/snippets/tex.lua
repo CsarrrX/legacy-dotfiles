@@ -138,7 +138,7 @@ return {
   s("it",   { t("\\textit{"), i(1), t("}") }),
   -- FIN DE LETRAS ESTILIZADAS -- 
   
-  -- LÓGICA
+  -- LÓGICA --
   s("imp",  { t("\\implies") }),
   s("iff",  { t("\\iff") }),
   s("fa",   { t("\\forall") }),
@@ -147,7 +147,7 @@ return {
   s("land", { t("\\land") }),
   s("lnot", { t("\\lnot") }),
   s("neq",  { t("\\neq") }),
-  -- FIN DE LÓGICA
+  -- FIN DE LÓGICA --
 
   -- TEORÍA DE CONJUNTOS -- 
   s("emp",  { t("\\emptyset") }),
@@ -182,14 +182,14 @@ return {
   s("norm",  { t("\\|"), i(1), t("\\|") }),
   -- FIN DE ESPACIOS MÉTRICOS, NORMAS Y PRODUCTOS INTERNOS --
   
-  -- TOPOLOGÍA 
+  -- TOPOLOGÍA --
   s("cl",  { t("\\cl") }),
   s("int", { t("\\int") }),
   s("fr",  { t("\\fr") }),
   s("ext", { t("\\ext") }),
-  -- FIN DE TOPOLOGÍA 
+  -- FIN DE TOPOLOGÍA --
 
-  -- TEORÍA DE CATEGORÍAS 
+  -- TEORÍA DE CATEGORÍAS --
   s("hom",  { t("\\Hom"), i(1), t("}("), i(2), t(", "), i(3), t(")") }),
   s("obj",  { t("\\Ob("), i(1), t(")") }),
   s("func", { i(1), t(" : \\mathcal{"), i(2), t("} \\to \\mathcal{"), i(3), t("}") }),
@@ -201,9 +201,9 @@ return {
   s("cRng",  { t("\\mathbf{Ring}") }),
   s("cMod",  { t("\\mathbf{Mod}") }),
   s("cVect", { t("\\mathbf{Vect}") }),
-  -- FIN DE TEORÍA DE CATEGORÍAS 
+  -- FIN DE TEORÍA DE CATEGORÍAS --
   
-  -- ÁLGEBRA 
+  -- ÁLGEBRA --
   s("nsub",  { t("\\triangleleft") }),
   s("oplus", { t("\\oplus") }),
   s("Oplus", { t("\\bigoplus") }),
@@ -212,7 +212,7 @@ return {
   s("ker",   { t("\\ker") }),
   s("aut",   { t("\\Aut("), i(1), t(")") }),
   s("deg",   { t("["), i(1), t(" : "), i(2), t("]") }),
-  -- FIN DE ÁLGEBRA
+  -- FIN DE ÁLGEBRA --
   
   -- OPERADORES -- 
   s("tint",   { t("\\topint") }),
@@ -238,6 +238,7 @@ return {
   s("exp", { t("\\exp"), i(1)}),
   s("ddx",  { t("\\frac{d}{d"), i(1), t("}") }),
   s("part",  { t("\\frac{\\partial}{\\partial"), i(1), t("}") }),
+  s("hat", { t("\\hat{ "), i(1), t("}") }),
   -- FIN DE GENERALES --
 
   -- MATEMÁTICAS ACTUARIALES --
