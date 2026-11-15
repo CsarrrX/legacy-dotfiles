@@ -239,6 +239,7 @@ return {
   s("ddx",  { t("\\frac{d}{d"), i(1), t("}") }),
   s("part",  { t("\\frac{\\partial}{\\partial"), i(1), t("}") }),
   s("hat", { t("\\hat{"), i(1), t("}") }),
+  s("bar", { t("\\bar{"), i(1), t("}") }),
   -- FIN DE GENERALES --
 
   -- MATEMÁTICAS ACTUARIALES --
