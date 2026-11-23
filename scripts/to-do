@@ -31,8 +31,7 @@ while read -u 3 -r line; do
     
     hash=$(echo -n "$task_content" | md5sum | awk '{print $1}')
     img_path="$CACHE_DIR/$hash.png"
-
-    if [[ "$task_content" =~ \$.*\$ ]]; then
+    if [[ "$task_content" =~ \$.*\$|\\\[.*\\\] ]]; then
         if [ ! -f "$img_path" ]; then
             tex_file="$CACHE_DIR/$hash.tex"
             
